@@ -1,0 +1,23 @@
+{
+  "name": "unigon-nodejs",
+  "version": "0.0.0",
+  "description": "nodejs server for project unigon",
+  "main": "web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wwvuillemot/Unigon-NodeJS.git"
+  },
+  "keywords": [
+    "heroku",
+    "unigon"
+  ],
+  "author": "Ward W. Vuillemot",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/wwvuillemot/Unigon-NodeJS/issues"
+  },
+  "homepage": "https://github.com/wwvuillemot/Unigon-NodeJS"
+}
