@@ -1,0 +1,22 @@
+link(rel="stylesheet", href="/style.css")
+
+h1 #{user.name} 
+  a(href = "/user/" + user.id + "/edit") edit
+
+if (hasMessages)
+  h2 Messages
+  ul(id = "messages")
+    each message in messages
+      li=message
+  
+
+if (user.characters.length)
+  h2 Characters
+  ul
+    each character in user.characters
+      li
+        a( href = "/character/" + character.id )
+          =character.name
+  
+else
+  p No characters!
