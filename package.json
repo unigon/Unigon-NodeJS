@@ -1,6 +1,6 @@
 {
   "name": "unigon-nodejs",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "nodejs server for project unigon",
   "main": "web.js",
   "scripts": {
@@ -20,6 +20,9 @@
     "url": "https://github.com/wwvuillemot/Unigon-NodeJS/issues"
   },
   "homepage": "https://github.com/wwvuillemot/Unigon-NodeJS",
+  "engines": {
+    "node": "0.10.x"
+  },
   "dependencies" : { 
     "express" : "3.x" ,
     "logfmt"  : "0.x",
