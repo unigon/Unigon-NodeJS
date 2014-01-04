@@ -17,7 +17,7 @@ exports.edit = function(req, res, next){
 
 exports.update = function(req, res, next){
   var body = req.body;
-  req.character.name = body.user.name;
+  req.character.name = body.player.name;
   res.message('Information updated!');
   res.redirect('/character/' + req.character.id);
 };

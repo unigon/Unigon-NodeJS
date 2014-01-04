@@ -1,0 +1,10 @@
+h1 Players
+
+p Click a player below to view a list of their characters.
+
+ul
+  each player in players
+    li
+      a(href = "/player/" + player.id )
+        = player.name
+        

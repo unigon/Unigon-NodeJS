@@ -1,7 +1,0 @@
-h1= user.name
-
-form(action='/user/#{user.id}', method='post')
-  input(type='hidden', name='_method', value='put')
-  label Name: 
-    input(type='text', name='user[name]', value=user.name)
-  input(type='submit', value='Update')

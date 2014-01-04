@@ -1,0 +1,7 @@
+h1= player.name
+
+form(action='/player/#{player.id}', method='post')
+  input(type='hidden', name='_method', value='put')
+  label Name: 
+    input(type='text', name='player[name]', value=player.name)
+  input(type='submit', value='Update')

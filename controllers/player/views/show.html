@@ -1,5 +1,5 @@
-h1 #{user.name} 
-  a(href = "/user/" + user.id + "/edit") edit
+h1 #{player.name} 
+  a(href = "/player/" + player.id + "/edit") edit
 
 if (hasMessages)
   h2 Messages
@@ -8,10 +8,10 @@ if (hasMessages)
       li=message
   
 
-if (user.characters.length)
+if (player.characters.length)
   h2 Characters
   ul
-    each character in user.characters
+    each character in player.characters
       li
         a( href = "/character/" + character.id )
           =character.name
