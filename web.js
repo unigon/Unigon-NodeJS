@@ -1,11 +1,13 @@
 // web.js
 var express = require("express");
+var partials = require("express-partials");
 var logfmt = require("logfmt");
 
 var engineName = 'jade';
 var engine = require(engineName);
 
 var app = express();
+app.use(partials());
 
 app.use(logfmt.requestLogger());
 
@@ -88,7 +90,7 @@ app.use(function(err, req, res, next){
 
 // assume 404 since no middleware responded
 app.use(function(req, res, next){
-  res.status(404).render('404', { url: req.originalUrl });
+  res.status(404).render('404', { url: req.originalUrl});
 });
 
 if (!module.parent) {

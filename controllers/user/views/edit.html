@@ -1,5 +1,5 @@
-link(rel='stylesheet', href='/style.css')
 h1= user.name
+
 form(action='/user/#{user.id}', method='post')
   input(type='hidden', name='_method', value='put')
   label Name: 
