@@ -23,8 +23,30 @@ h1 a {
 {
   list-style: none;
   float: left;
+  padding-top: 0px;
+}
+
+#navigation ul
+{
+  padding-top: 0px;
 }
 
 .clear{
   clear: both;
+}
+
+#top
+{
+  color: #aaa;
+  border-bottom: 1px solid #aaa;  
+  padding-bottom: 10px;
+}
+
+#footer
+{
+  border-top: 1px solid #aaa;
+  color: #aaa;
+  font-size: 11px;
+  text-align: center;
+  font-style: italic;
 }
