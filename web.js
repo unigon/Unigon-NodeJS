@@ -85,12 +85,12 @@ app.use(function(err, req, res, next){
   console.error(err.stack);
 
   // error page
-  res.status(500).render('5xx');
+  res.status(500).render('5xx', { title: '5xx'});
 });
 
 // assume 404 since no middleware responded
 app.use(function(req, res, next){
-  res.status(404).render('404', { url: req.originalUrl});
+  res.status(404).render('404', { url: req.originalUrl, title: '404'});
 });
 
 if (!module.parent) {

@@ -8,11 +8,11 @@ exports.before = function(req, res, next){
 };
 
 exports.show = function(req, res, next){
-  res.render('show', { character: req.character });
+  res.render('show', { character: req.character, title: 'Character | ' + req.character.name });
 };
 
 exports.edit = function(req, res, next){
-  res.render('edit', { character: req.character });
+  res.render('edit', { character: req.character, title: 'Character | ' + req.character.name + ' | Edit' });
 };
 
 exports.update = function(req, res, next){

@@ -14,15 +14,15 @@ exports.before = function(req, res, next){
 }
 
 exports.list = function(req, res, next){
-  res.render('list', { users: db.users });
+  res.render('list', { users: db.users, title: 'Users' });
 };
 
 exports.edit = function(req, res, next){
-  res.render('edit', { user: req.user });
+  res.render('edit', { user: req.user, title: 'User | ' + req.user.name + ' | Edit' });
 };
 
 exports.show = function(req, res, next){
-  res.render('show', { user: req.user });
+  res.render('show', { user: req.user, title: 'User | ' + req.user.name });
 };
 
 exports.update = function(req, res, next){
