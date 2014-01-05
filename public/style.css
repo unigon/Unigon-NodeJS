@@ -51,7 +51,17 @@ h1 a {
   font-style: italic;
 }
 
-.game
+#game
+{
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0px;
+}
+
+.game_layer
 {
   border: 1px solid black;
   width: 400px;
@@ -60,4 +70,20 @@ h1 a {
   margin-right: auto;
   display: block;
   padding: 0px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#layer_player{
+  z-index: 2;
+}
+
+#layer_npc{
+  z-index: 1;
+}
+
+#layer_background{
+  z-index: 0;
+  background: green;
 }

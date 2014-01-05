@@ -1,30 +1,31 @@
 var Sprite = Class.extend({
-  init: function(canvasContext, position, width, height, fillStyle, spriteImage){
-    this.canvasContext = canvasContext;
+  init: function(position, width, height, stepSize, fillStyle, spriteImage){
     this.position = position;
     this.spriteImage = spriteImage;
     this.fillStyle = fillStyle;
     this.height = height;
     this.width = width;
+    this.stepSize = stepSize;
+  },
+  layer: function(layer){
+    this.layer = layer;
   },
   draw: function(){
-    this.canvasContext.fillStyle=this.fillStyle;
-    this.canvasContext.fillRect(this.position.x, this.position.y, this.width, this.height);
+    if(layer){
+      this.layer.context.fillStyle=this.fillStyle;
+      this.layer.context.fillRect(this.position.x, this.position.y, this.width, this.height);
+    }
   },
   moveUp: function(){
-    this.position.y++;
-    this.draw();
+    this.position.y -= stepSize;
   },
   moveDown: function(){
-    this.position.y--;
-    this.draw();
+    this.position.y += stepSize;
   },
   moveLeft: function(){
-    this.position.x--;
-    this.draw();
+    this.position.x -= stepSize;
   },
   moveRight: function(){
-    this.position.x++;
-    this.draw();
+    this.position.x += stepSize;
   },
 });

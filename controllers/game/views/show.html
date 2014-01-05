@@ -1,6 +1,9 @@
 h1 #{game.name} 
   a(href = "/game/" + game.id + "/edit") edit
-  
-canvas(id = 'game' + game.id + '_canvas', class = 'game')
 
-p
+#game
+  canvas(id = 'layer_player', class = 'game_layer')
+  canvas(id = 'layer_npc', class = 'game_layer')
+  canvas(id = 'layer_background', class = 'game_layer')
+
+p.clear  
