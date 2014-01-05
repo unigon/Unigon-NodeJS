@@ -64,6 +64,6 @@ exports.show = function(req, res, next){
 exports.update = function(req, res, next){
   var body = req.body;
   req.game.name = body.game.name;
-  res.message('Information for game %s updated!', req.game.name);
+  res.message('Information for game updated!');
   res.redirect('/game/' + req.game.id);
 };

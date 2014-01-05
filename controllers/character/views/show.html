@@ -2,3 +2,14 @@ h1 #{character.name}
   a(href='/character/#{character.id}/edit') edit
 
 p You are viewing #{character.name}
+
+if (character.games.length)
+  h2 Games
+  ul
+    each game in character.games
+      li
+        a( href = "/game/" + game.id )
+          =game.name + ' [' + game.id + ']'
+  
+else
+  p No games!
