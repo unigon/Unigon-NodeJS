@@ -54,8 +54,8 @@ h1 a {
 .game
 {
   border: 1px solid black;
-  width: 800px;
-  height: 800px;
+  width: 400px;
+  height: 400px;
   margin-left: auto;
   margin-right: auto;
   display: block;
