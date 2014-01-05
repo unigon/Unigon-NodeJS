@@ -17,15 +17,15 @@ var Sprite = Class.extend({
     }
   },
   moveUp: function(){
-    this.position.y -= stepSize;
+    this.position.y -= this.stepSize;
   },
   moveDown: function(){
-    this.position.y += stepSize;
+    this.position.y += this.stepSize;
   },
   moveLeft: function(){
-    this.position.x -= stepSize;
+    this.position.x -= this.stepSize;
   },
   moveRight: function(){
-    this.position.x += stepSize;
+    this.position.x += this.stepSize;
   },
 });

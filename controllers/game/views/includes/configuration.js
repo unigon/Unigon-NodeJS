@@ -9,13 +9,22 @@ var gameConfiguration = {
   keyDownRight: 67,
   keyActionPrimary: 83,
   canvas: {
-    width: 400,
-    height: 400
+    width: 600,
+    height: 600
   },
   player: {
     position: {
-      x: 200,
-      y: 200
+      x: 300,
+      y: 300
+    },
+    size: {
+      width: 30,
+      height: 30,
+      step: 30,
+    },
+    sprite: {      
+      color: '#CCCC00',
+      image: null,
     }
   }
 };
