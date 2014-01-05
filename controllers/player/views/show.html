@@ -1,20 +1,13 @@
 h1 #{player.name} 
   a(href = "/player/" + player.id + "/edit") edit
 
-if (hasMessages)
-  h2 Messages
-  ul(id = "messages")
-    each message in messages
-      li=message
-  
-
 if (player.characters.length)
   h2 Characters
   ul
     each character in player.characters
       li
         a( href = "/character/" + character.id )
-          =character.name
+          =character.name + ' [' + character.id + ']'
   
 else
   p No characters!

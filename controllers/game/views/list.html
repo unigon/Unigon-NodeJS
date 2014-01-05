@@ -1,0 +1,10 @@
+h1 Games 
+  a(href = "/games/new") new
+
+p Click a game below to view details.
+ul
+  each game in games
+    li
+      a(href = "/game/" + game.id )
+        =game.name + ' [' + game.id + ']'
+        

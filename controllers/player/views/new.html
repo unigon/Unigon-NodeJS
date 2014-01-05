@@ -1,0 +1,7 @@
+h1 Create Player
+ 
+form(action='/player', method='post')
+  input(type='hidden', name='_method', value='post')
+  label Name: 
+    input(type='text', name='player[name]', value='')
+  input(type='submit', value='Create')

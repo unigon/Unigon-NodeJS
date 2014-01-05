@@ -1,0 +1,5 @@
+form(action='/game/#{game.id}', method='post')
+  input(type='hidden', name='_method', value='put')
+  label Name: 
+    input(type='text', name='game[name]', value=game.name)
+  input(type='submit', value='Update')
