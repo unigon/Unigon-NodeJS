@@ -12,7 +12,7 @@ var Player = Sprite.extend({
     this._super(actionType);
     switch(actionType){
       case 'primary':
-        this._colorSteps          = 200; // Number of colors to display.
+        this._colorSteps          = 30; // Number of colors to display.
         this._increment           = 0;
         this._startColor          = new Color(255,0,0); // Color 1
 

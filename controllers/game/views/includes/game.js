@@ -4,8 +4,8 @@ var layer_player;
 $(document).ready( function(){
   // configure the DIV id="game"
   game = $('#game');
-  game.width(gameConfiguration.canvas.width  + 'px');
-  game.height(gameConfiguration.canvas.height + 'px');
+  game.width(  gameConfiguration.canvas.width  + 'px' );
+  game.height( gameConfiguration.canvas.height + 'px' );
 
   // load DIV layers with class="game_layer"
   $('.game_layer').each(function(){
@@ -17,7 +17,10 @@ $(document).ready( function(){
   layer_player = layers['layer_player'];
   if(layer_player){
     playerConfiguration = gameConfiguration.player;
-    color = new Color(playerConfiguration.sprite.color.red, playerConfiguration.sprite.color.green, playerConfiguration.sprite.color.blue);
+    color  = new Color(
+      playerConfiguration.sprite.color.red, 
+      playerConfiguration.sprite.color.green, 
+      playerConfiguration.sprite.color.blue);
     player = new Player(
       playerConfiguration.position.x, 
       playerConfiguration.position.y, 
