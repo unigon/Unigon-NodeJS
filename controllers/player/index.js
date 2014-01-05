@@ -17,6 +17,10 @@ exports.list = function(req, res, next){
   res.render('list', { players: db.players, title: 'Players' });
 };
 
+exports.move = function(req, res, next){
+  res.render('move', { });
+};
+
 exports.new = function(req, res, next){
   res.render('new', { title: 'Player | New' });
 };
