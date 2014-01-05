@@ -28,4 +28,13 @@ var Sprite = Class.extend({
   moveRight: function(){
     this.position.x += this.stepSize;
   },
+  center: function(){
+    this.position.reinit();
+  },
+  action: function(actionType){
+    // intentionally empty
+  },
+  update: function(){
+    // intentionally do nothing
+  }
 });

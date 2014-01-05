@@ -16,6 +16,6 @@ $(document).ready( function(){
     playerConfiguration = gameConfiguration.player;
     player = new Player(playerConfiguration.position.x, playerConfiguration.position.y, playerConfiguration.size.width, playerConfiguration.size.height, playerConfiguration.size.step,  playerConfiguration.sprite.color,  playerConfiguration.sprite.image);
     layer_player.layer.add(player);
-    layer_player.layer.redraw();
+    layer_player.layer.animate();
   }
 });

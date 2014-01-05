@@ -8,6 +8,7 @@ var gameConfiguration = {
   keyDownLeft: 90,
   keyDownRight: 67,
   keyActionPrimary: 83,
+  keyCenter: 220,
   canvas: {
     width: 600,
     height: 600

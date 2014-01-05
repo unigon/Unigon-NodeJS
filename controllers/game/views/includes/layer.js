@@ -21,5 +21,23 @@ var Layer = Class.extend({
   },
   clear: function(){
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  },
+  animate: function(){
+    this.clear();
+    for(var sprite in this.sprites){
+      this.sprites[sprite].update();
+    }    
+    this.redraw();
+    var _layer = this;
+    window.requestAnimFrame(function() {
+      _layer.animate();
+    });
   }
 });
+
+window.requestAnimFrame = (
+  function(callback) {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
+      window.setTimeout(callback, 1000 / 60);
+    };
+  })();

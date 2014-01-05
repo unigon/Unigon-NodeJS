@@ -7,4 +7,15 @@ var Player = Sprite.extend({
     // Call the inherited version of dance()
     return this._super();
   },
+  action: function(actionType){
+    this._super(actionType);
+    switch(actionType){
+      case 'primary':
+        alert(actionType);
+        
+        break;
+      default:
+        break;
+    }
+  },
 });
