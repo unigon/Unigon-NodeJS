@@ -11,5 +11,9 @@ var Position = Class.extend({
     this.x = this.initialX;
     this.y = this.initialY;
     this.z = this.initialZ;
+  },
+  copy: function(){
+    position = new Position(this.x, this.y, this.z);
+    return position;
   }
 });

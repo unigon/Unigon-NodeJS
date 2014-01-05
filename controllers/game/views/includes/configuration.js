@@ -24,7 +24,11 @@ var gameConfiguration = {
       step: 30,
     },
     sprite: {      
-      color: '#CCCC00',
+      color: {
+        red: 255,
+        green: 0,
+        blue: 255,
+      },
       image: null,
     }
   }

@@ -28,7 +28,8 @@ var Layer = Class.extend({
       this.sprites[sprite].update();
     }    
     this.redraw();
-    var _layer = this;
+    // this likely will not scale to two+ layers
+    _layer = this;
     window.requestAnimFrame(function() {
       _layer.animate();
     });

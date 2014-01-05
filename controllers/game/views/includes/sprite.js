@@ -1,19 +1,22 @@
 var Sprite = Class.extend({
-  init: function(position, width, height, stepSize, fillStyle, spriteImage){
+  init: function(position, width, height, stepSize, color, spriteImage){
     this.position = position;
+    this.lastRedrawPosition = new Position( position.x, position.y, position.z );
     this.spriteImage = spriteImage;
-    this.fillStyle = fillStyle;
+    this.color = color;
     this.height = height;
     this.width = width;
     this.stepSize = stepSize;
+    this.initials = { color: color, width: width, height: height, stepSize: stepSize };
   },
   layer: function(layer){
     this.layer = layer;
   },
   draw: function(){
     if(layer){
-      this.layer.context.fillStyle=this.fillStyle;
+      this.layer.context.fillStyle=this.color.rgb();
       this.layer.context.fillRect(this.position.x, this.position.y, this.width, this.height);
+      this.lastRedrawPosition = this.position.copy();
     }
   },
   moveUp: function(){
