@@ -30,10 +30,15 @@ var Layer = Class.extend({
     this.redraw();
     // this likely will not scale to two+ layers
     _layer = this;
-    window.requestAnimFrame(function() {
-      _layer.animate();
-    });
-  }
+    window.requestAnimFrame(function(){_layer.animate();});
+  },
+  // requestAnimFrame: function(callback) {
+  //   return window.requestAnimationFrame
+  //    || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
+  //     window.setTimeout(callback, 1000 / 60);
+  //     }
+  // },    
+      // })();
 });
 
 window.requestAnimFrame = (
