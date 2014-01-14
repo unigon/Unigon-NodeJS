@@ -6,12 +6,16 @@ var SystemManager = Class.extend({
     this._lastTime  = startTime;
     this._systems   = [];
     this._logged    = 0;
+    this._actionKey = null;
   },
   start: function(){
     this.update();
   },
   addSystem: function(aSystem){
     this._systems.push(aSystem);
+  },
+  setActionKey: function(aKey){
+    this._actionKey = aKey;
   },
   currentTime: function(){
     return new Date().getTime();
@@ -23,8 +27,10 @@ var SystemManager = Class.extend({
 
   	for(system in this._systems)
     {
-      this._systems[system].update(deltaTime);
+      this._systems[system].update(deltaTime, this._actionKey);
     }
+
+    this._actionKey = null;
 
     var _uniSystemManager = this;
     window.requestAnimFrame(function(){_uniSystemManager.update();});

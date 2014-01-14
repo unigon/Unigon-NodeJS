@@ -17,19 +17,29 @@ var EntityManager = Class.extend({
   },
   addComponentToEntity: function(aComponent, aEntity){
     componentName = aComponent.name();
-    if(this._components[componentName])
+    if(this._components[componentName] != null)
     {
     	// intentionally do nothing
     }
     else
     {
     	this._components[componentName] = {};
-
     }
     this._components[componentName][aEntity.entityId()] = aComponent;
+    if(UG_DEBUG){
+      console.log('Added [' + componentName +'] to entity [' + aEntity.entityId() + ']');
+    }
   },
-  getComponentForEntity: function(aComponentName, aEntity){
-  	this._components[aComponentName][aEntity.entityId()];
+  getComponentForEntity: function(aComponentName, aEntityId){
+    entities = this._components[aComponentName];
+    if(entities)
+    {
+      return entities[aEntityId];
+    }
+    else
+    {
+      return null;
+    }
   },
   removeEntity: function(aEntity){
     for(componentName in this._components)
