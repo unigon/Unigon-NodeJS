@@ -12,7 +12,7 @@ var ControllerSystem = System.extend({
       controllerComponent = this._entityManager.getComponentForEntity(this._componentName, entityId);
       positionComponent   = this._entityManager.getComponentForEntity('PositionComponent', entityId);
       movementComponent   = this._entityManager.getComponentForEntity('MovementComponent', entityId);
-      rendererComponent   = this._entityManager.getComponentForEntity('rendererComponent', entityId);
+      // rendererComponent   = this._entityManager.getComponentForEntity('RendererComponent', entityId);
 
       if(controllerComponent != null && positionComponent != null && movementComponent != null){
         if(action == controllerComponent.upKey())

@@ -1,6 +1,6 @@
 var player;
 var layers = {};
-var layer_player;
+var layerPlayer;
 var entityManager = new EntityManager();
 var systemManager = new SystemManager();
 var UG_DEBUG = true;
@@ -17,56 +17,62 @@ $(document).ready( function(){
 
   // load DIV layers with class="game_layer"
   $('.game_layer').each(function(){
-    layer = new Layer( this, this.getContext("2d") );
+    layer = new Layer( 
+      this, 
+      this.getContext("2d"), 
+      gameConfiguration.canvas.width, 
+      gameConfiguration.canvas.height );
     layers[this.id] =  { id: this.id, layer: layer };
   });
   
   // add the player to the player layer
-  layer_player = layers['layer_player'];
-  if(layer_player){
+  layerPlayer = layers['layer_player'];
+  if(layerPlayer){
 
-
-    // color  = new Color(
-    //   playerConfiguration.sprite.color.green, 
-    //   playerConfiguration.sprite.color.red, 
-    //   playerConfiguration.sprite.color.blue);
-    // npc = new Player(
-    //   playerConfiguration.position.x-150, 
-    //   playerConfiguration.position.y-150, 
-    //   playerConfiguration.size.width, 
-    //   playerConfiguration.size.height, 
-    //   playerConfiguration.size.step,  
-    //   color,  
-    //   playerConfiguration.sprite.image
-    // );
-    // layer_player.layer.add(npc);
-
+    // convenience variable to get player node of game configuration
     playerConfiguration = gameConfiguration.player;
 
+    // player entity
+    // POE - plain old entity
     playerEntity = entityManager.createEntity();
-    currentHitPoints = 200;
-    maximumHitPoints = 200;
 
-    playerHealth = new HealthComponent(currentHitPoints, maximumHitPoints);
+    // add health to player entity
+    playerHealth = new HealthComponent(
+      playerConfiguration.points.current, 
+      playerConfiguration.points.maximum);
     entityManager.addComponentToEntity(playerHealth, playerEntity);
 
+    // add render to player
+    // consists of color and sprite
     playerColor  = new ColorComponent(
-      playerConfiguration.sprite.color.red, 
-      playerConfiguration.sprite.color.green, 
-      playerConfiguration.sprite.color.blue);
-    entityManager.addComponentToEntity(playerColor, playerEntity);
+      playerConfiguration.color.red, 
+      playerConfiguration.color.green, 
+      playerConfiguration.color.blue);
+    playerSprite = new SpriteComponent(
+      playerConfiguration.sprite.height, 
+      playerConfiguration.sprite.width, 
+      playerConfiguration.sprite.url);
+    console.log('playerSprite.print()');
+    console.log(playerSprite.print());
+    playerRender = new RenderComponent(
+      playerSprite,
+      playerColor); 
+    entityManager.addComponentToEntity(playerRender, playerEntity);    
 
+    // add position to player
     playerPosition = new PositionComponent(
       playerConfiguration.position.x, 
       playerConfiguration.position.y,
       0);
     entityManager.addComponentToEntity(playerPosition, playerEntity);
 
+    // add movement to player
     playerMovement = new MovementComponent(
       playerConfiguration.movement.speed, 
       playerConfiguration.movement.acceleration);
     entityManager.addComponentToEntity(playerMovement, playerEntity);
 
+    // add controller to player
     playerController = new ControllerComponent(
       gameConfiguration.keyUp,
       gameConfiguration.keyRight,
@@ -77,28 +83,18 @@ $(document).ready( function(){
       );
     entityManager.addComponentToEntity(playerController, playerEntity);
 
+    // add the various sub-systems 
+    // used by the game
     healthSystem = new HealthSystem(entityManager);
     systemManager.addSystem(healthSystem);
+
     controllerSystem = new ControllerSystem(entityManager);
     systemManager.addSystem(controllerSystem);
-    systemManager.start();
 
-    // OLD METHOD
-    layer_player.layer.animate();
+    renderSystem = new RenderSystem(entityManager, layerPlayer);
+    systemManager.addSystem(renderSystem);
 
-    color  = new Color(
-      playerConfiguration.sprite.color.red, 
-      playerConfiguration.sprite.color.green, 
-      playerConfiguration.sprite.color.blue);
-    player = new Player(
-      playerPosition,
-      playerConfiguration.size.width, 
-      playerConfiguration.size.height, 
-      playerMovement,  
-      playerColor,
-      playerConfiguration.sprite.image
-    );
-    layer_player.layer.add(player);   
+    systemManager.start(); 
 
   }
   

@@ -1,9 +1,7 @@
 var RenderComponent = Component.extend({
-  init: function(aSprite){
+  init: function(aSprite, aColor){
   	this._super('RenderComponent');
-    this._sprite = aSprite;
-  },
-  sprite: function(){
-  	return this._sprite;
+    this.sprite = aSprite;
+    this.color  = aColor;
   }
 });

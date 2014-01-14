@@ -22,18 +22,24 @@ var gameConfiguration = {
       speed: 15,
       acceleration: 0
     },
+    sprite: {
+      width:  30,
+      height: 30,
+      url: '/assets/sprites/player.jpg'
+    },
     size: {
       width: 30,
       height: 30,
       step: 30,
     },
-    sprite: {      
-      color: {
-        red: 255,
-        green: 0,
-        blue: 255,
-      },
-      image: null,
+    color: {
+      red: 255,
+      green: 0,
+      blue: 255,
+    },
+    points: {
+      current: 200,
+      maximum: 200
     }
   }
 };

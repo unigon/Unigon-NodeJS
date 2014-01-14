@@ -9,11 +9,7 @@ body
   script
     include includes/eos/class.js
 
-    include includes/eos/primitives/color.js
-    include includes/eos/primitives/position.js
     include includes/eos/primitives/layer.js
-    include includes/eos/primitives/sprite.js
-    include includes/eos/primitives/player.js
 
     include includes/eos/entities/entity.js
     include includes/eos/entities/entity_manager.js
@@ -25,10 +21,12 @@ body
     include includes/eos/components/movement_component.js
     include includes/eos/components/position_component.js
     include includes/eos/components/render_component.js
+    include includes/eos/components/sprite_component.js
 
     include includes/eos/systems/system.js
     include includes/eos/systems/controller_system.js
     include includes/eos/systems/health_system.js
+    include includes/eos/systems/render_system.js
     include includes/eos/systems/system_manager.js
 
     include includes/configuration.js
