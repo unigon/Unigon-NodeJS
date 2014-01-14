@@ -2,7 +2,6 @@ var ControllerSystem = System.extend({
   init: function(aEntityManager){
     this._super(aEntityManager);
     this._componentName = 'ControllerComponent';
-    this.log = 0;
   },
   update: function(deltaTime, action){
     if(action == null) return;
@@ -12,34 +11,29 @@ var ControllerSystem = System.extend({
     {
       controllerComponent = this._entityManager.getComponentForEntity(this._componentName, entityId);
       positionComponent   = this._entityManager.getComponentForEntity('PositionComponent', entityId);
-      rendererComponent   = this._entityManager.getComponentForEntity('RendererComponent', entityId);
+      movementComponent   = this._entityManager.getComponentForEntity('MovementComponent', entityId);
+      rendererComponent   = this._entityManager.getComponentForEntity('rendererComponent', entityId);
 
-      if (this.log++ < 1){
-        console.log(entity);
-        console.log(controllerComponent);
-        console.log(positionComponent);
-        console.log(rendererComponent);
-      } 
-      if(controllerComponent != null && positionComponent != null){
+      if(controllerComponent != null && positionComponent != null && movementComponent != null){
         if(action == controllerComponent.upKey())
         {
-          if (UG_DEBUG) console.log('Move Entity [' + entityId + '] up');
-          positionComponent.y--;
+          if (UG_DEBUG) console.log('Move Entity [' + entityId + '] up by [' + movementComponent.speed + ']');
+          positionComponent.y -= movementComponent.speed;
         }
         if(action == controllerComponent.downKey())
         {
-          if (UG_DEBUG) console.log('Move Entity [' + entityId + '] down');
-          positionComponent.y++;
+          if (UG_DEBUG) console.log('Move Entity [' + entityId + '] down by [' + movementComponent.speed + ']');
+          positionComponent.y += movementComponent.speed;
         }
         if(action == controllerComponent.leftKey())
         {
-          if (UG_DEBUG) console.log('Move Entity [' + entityId + '] left');
-          positionComponent.x--;
+          if (UG_DEBUG) console.log('Move Entity [' + entityId + '] left by [' + movementComponent.speed + ']');
+          positionComponent.x -= movementComponent.speed;
         }
         if(action == controllerComponent.rightKey())
         {
-          if (UG_DEBUG) console.log('Move Entity [' + entityId + '] right');
-          positionComponent.x++;
+          if (UG_DEBUG) console.log('Move Entity [' + entityId + '] right by [' + movementComponent.speed + ']');
+          positionComponent.x += movementComponent.speed;
         }
         if(action == controllerComponent.secondaryActionKey())
         {

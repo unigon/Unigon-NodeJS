@@ -18,6 +18,10 @@ var gameConfiguration = {
       x: 300,
       y: 300
     },
+    movement:{
+      speed: 15,
+      acceleration: 0
+    },
     size: {
       width: 30,
       height: 30,

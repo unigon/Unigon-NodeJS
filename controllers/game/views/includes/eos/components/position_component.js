@@ -19,6 +19,6 @@ var PositionComponent = Component.extend({
   },
   print: function()
   {
-    console.log('x=' + this.x + ', y=' + this.y + ', z=' + this.z);
+    if (UG_DEBUG) console.log('x=' + this.x + ', y=' + this.y + ', z=' + this.z);
   }
 });

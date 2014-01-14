@@ -62,6 +62,11 @@ $(document).ready( function(){
       0);
     entityManager.addComponentToEntity(playerPosition, playerEntity);
 
+    playerMovement = new MovementComponent(
+      playerConfiguration.movement.speed, 
+      playerConfiguration.movement.acceleration);
+    entityManager.addComponentToEntity(playerMovement, playerEntity);
+
     playerController = new ControllerComponent(
       gameConfiguration.keyUp,
       gameConfiguration.keyRight,
@@ -89,7 +94,7 @@ $(document).ready( function(){
       playerPosition,
       playerConfiguration.size.width, 
       playerConfiguration.size.height, 
-      playerConfiguration.size.step,  
+      playerMovement,  
       playerColor,
       playerConfiguration.sprite.image
     );

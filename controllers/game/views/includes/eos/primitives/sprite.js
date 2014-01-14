@@ -1,13 +1,13 @@
 var Sprite = Class.extend({
-  init: function(position, width, height, stepSize, color, spriteImage){
+  init: function(position, width, height, movement, color, spriteImage){
     this.position = position;
     this.lastRedrawPosition = new Position( position.x, position.y, position.z );
     this.spriteImage = spriteImage;
     this.color = color;
     this.height = height;
     this.width = width;
-    this.stepSize = stepSize;
-    this.initials = { color: color, width: width, height: height, stepSize: stepSize };
+    this.movement = movement;
+    this.initials = { color: color, width: width, height: height, movement: movement };
   },
   layer: function(layer){
     this.layer = layer;
@@ -20,16 +20,16 @@ var Sprite = Class.extend({
     }
   },
   moveUp: function(){
-    this.position.y -= this.stepSize;
+    this.position.y -= this.movement.speed;
   },
   moveDown: function(){
-    this.position.y += this.stepSize;
+    this.position.y += this.movement.speed;
   },
   moveLeft: function(){
-    this.position.x -= this.stepSize;
+    this.position.x -= this.movement.speed;
   },
   moveRight: function(){
-    this.position.x += this.stepSize;
+    this.position.x += this.movement.speed;
   },
   center: function(){
     this.position.reinit();
