@@ -24,22 +24,7 @@ $(document).ready( function(){
   // add the player to the player layer
   layer_player = layers['layer_player'];
   if(layer_player){
-    playerConfiguration = gameConfiguration.player;
 
-    color  = new Color(
-      playerConfiguration.sprite.color.red, 
-      playerConfiguration.sprite.color.green, 
-      playerConfiguration.sprite.color.blue);
-    player = new Player(
-      playerConfiguration.position.x, 
-      playerConfiguration.position.y, 
-      playerConfiguration.size.width, 
-      playerConfiguration.size.height, 
-      playerConfiguration.size.step,  
-      color,  
-      playerConfiguration.sprite.image
-    );
-    layer_player.layer.add(player);
 
     // color  = new Color(
     //   playerConfiguration.sprite.color.green, 
@@ -56,7 +41,7 @@ $(document).ready( function(){
     // );
     // layer_player.layer.add(npc);
 
-    layer_player.layer.animate();
+    playerConfiguration = gameConfiguration.player;
 
     playerEntity = entityManager.createEntity();
     currentHitPoints = 200;
@@ -92,6 +77,23 @@ $(document).ready( function(){
     controllerSystem = new ControllerSystem(entityManager);
     systemManager.addSystem(controllerSystem);
     systemManager.start();
+
+    // OLD METHOD
+    layer_player.layer.animate();
+
+    color  = new Color(
+      playerConfiguration.sprite.color.red, 
+      playerConfiguration.sprite.color.green, 
+      playerConfiguration.sprite.color.blue);
+    player = new Player(
+      playerPosition,
+      playerConfiguration.size.width, 
+      playerConfiguration.size.height, 
+      playerConfiguration.size.step,  
+      playerColor,
+      playerConfiguration.sprite.image
+    );
+    layer_player.layer.add(player);   
 
   }
   

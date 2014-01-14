@@ -1,6 +1,6 @@
 var Player = Sprite.extend({
-  init: function(positionX, positionY, width, height, stepSize, color, spriteImage){
-    position = new Position(positionX, positionY, 0);
+  init: function(position, width, height, stepSize, color, spriteImage){
+    position = position;
     this._super( position, width, height, stepSize, color, spriteImage );
     this._initialColor = color.copy();
   },
