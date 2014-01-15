@@ -29,9 +29,6 @@ $(document).ready( function(){
   layerPlayer = layers['layer_player'];
   if(layerPlayer){
 
-    // convenience variable to get player node of game configuration
-    playerConfiguration = gameConfiguration.player;
-
     // player entity
     // POE - plain old entity
     playerEntity = entityManager.createEntity();
@@ -74,12 +71,12 @@ $(document).ready( function(){
 
     // add controller to player
     playerController = new ControllerComponent(
-      gameConfiguration.keyUp,
-      gameConfiguration.keyRight,
-      gameConfiguration.keyDown,
-      gameConfiguration.keyLeft,
-      gameConfiguration.keyActionPrimary,
-      gameConfiguration.keyCenter
+      playerConfiguration.controls.keyUp,
+      playerConfiguration.controls.keyRight,
+      playerConfiguration.controls.keyDown,
+      playerConfiguration.controls.keyLeft,
+      playerConfiguration.controls.keyActionPrimary,
+      playerConfiguration.controls.keyCenter
       );
     entityManager.addComponentToEntity(playerController, playerEntity);
 
