@@ -31,11 +31,6 @@ var playerConfiguration = {
     height: 30,
     url: '/assets/sprites/player.jpg'
   },
-  size: {
-    width: 30,
-    height: 30,
-    step: 30,
-  },
   color: {
     red: 255,
     green: 0,
@@ -46,3 +41,38 @@ var playerConfiguration = {
     maximum: 200
   }
 };
+
+var npcs = [
+  {
+    position: {
+      x: 150,
+      y: 450
+    },
+    sprite: {
+      width: 30,
+      height: 30,
+      url: '/assets/sprites/npc.jpg'
+    },
+    color: {
+      red: 0,
+      green: 255,
+      blue: 255,
+    }
+  },
+  {
+    position: {
+      x: 200,
+      y: 200
+    },
+    sprite: {
+      width: 30,
+      height: 30,
+      url: '/assets/sprites/npc.jpg'
+    },
+    color: {
+      red: 0,
+      green: 255,
+      blue: 255,
+    }
+  }
+];

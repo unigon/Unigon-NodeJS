@@ -49,9 +49,8 @@ $(document).ready( function(){
       playerConfiguration.sprite.height, 
       playerConfiguration.sprite.width, 
       playerConfiguration.sprite.url);
-    console.log('playerSprite.print()');
-    console.log(playerSprite.print());
     playerRender = new RenderComponent(
+      layerPlayer.layer,
       playerSprite,
       playerColor); 
     entityManager.addComponentToEntity(playerRender, playerEntity);    
@@ -80,19 +79,52 @@ $(document).ready( function(){
       );
     entityManager.addComponentToEntity(playerController, playerEntity);
 
-    // add the various sub-systems 
-    // used by the game
-    healthSystem = new HealthSystem(entityManager, layerPlayer.layer);
-    systemManager.addSystem(healthSystem);
-
-    controllerSystem = new ControllerSystem(entityManager, layerPlayer.layer);
-    systemManager.addSystem(controllerSystem);
-
-    renderSystem = new RenderSystem(entityManager, layerPlayer.layer);
-    systemManager.addSystem(renderSystem);
-
-    systemManager.start(); 
-
   }
+
+  layerNpcs = layers['layer_npc'];
+  if(layerNpcs && npcs){
+    for(npcId in npcs){
+      npcConfiguration = npcs[npcId];
+      npcEntity = entityManager.createEntity();
+      if(npcConfiguration.position)
+      {
+        npcPosition = new PositionComponent(
+        npcConfiguration.position.x, 
+        npcConfiguration.position.y,
+        0);
+        entityManager.addComponentToEntity(npcPosition, npcEntity);
+      }
+      if(npcConfiguration.color && npcConfiguration.sprite)
+      {
+        npcColor  = new ColorComponent(
+          npcConfiguration.color.red, 
+          npcConfiguration.color.green, 
+          npcConfiguration.color.blue);
+        npcSprite = new SpriteComponent(
+          npcConfiguration.sprite.height, 
+          npcConfiguration.sprite.width, 
+          npcConfiguration.sprite.url);
+        npcRender = new RenderComponent(
+          layerNpcs.layer,
+          npcSprite,
+          npcColor); 
+        entityManager.addComponentToEntity(npcRender, npcEntity);   
+      }
+    }
+  }
+
+  // add the various sub-systems 
+  // used by the game
+  healthSystem = new HealthSystem(entityManager, layerPlayer.layer);
+  systemManager.addSystem(healthSystem);
+
+  controllerSystem = new ControllerSystem(entityManager, layerPlayer.layer);
+  systemManager.addSystem(controllerSystem);
+
+  renderSystem = new RenderSystem(entityManager, [layerPlayer.layer, layerNpcs.layer]);
+  systemManager.addSystem(renderSystem);
+
+  systemManager.start(); 
+
   
 });

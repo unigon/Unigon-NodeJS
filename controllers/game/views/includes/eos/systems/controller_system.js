@@ -31,7 +31,7 @@ var ControllerSystem = System.extend({
         }
         if(action == controllerComponent.downKey())
         {
-          if(positionComponent.y < (this._layer.height() - rendererComponent.sprite.height)){
+          if(positionComponent.y < (rendererComponent.layer.height() - rendererComponent.sprite.height)){
             positionComponent.y += movementComponent.speed;
             if (UG_DEBUG) console.log(
               'Move Entity [' + entityId + 
@@ -51,7 +51,7 @@ var ControllerSystem = System.extend({
         }
         if(action == controllerComponent.rightKey())
         {
-          if(positionComponent.x < (this._layer.width() - rendererComponent.sprite.width)){
+          if(positionComponent.x < (rendererComponent.layer.width() - rendererComponent.sprite.width)){
             positionComponent.x += movementComponent.speed;
             if (UG_DEBUG) console.log(
               'Move Entity [' + entityId + 
