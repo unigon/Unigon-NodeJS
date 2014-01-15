@@ -1,11 +1,10 @@
 var RenderSystem = System.extend({
   init: function(aEntityManager, aLayer){
-    this._super(aEntityManager);
+    this._super(aEntityManager, aLayer);
     this._componentName = 'RenderComponent';
-    this.layer          = aLayer;
   },
   update: function(deltaTime, action){
-    this.layer.layer.clear();
+    this._layer.clear();
    
     entitiesWithController = this._entityManager.getEntitiesForComponent(this._componentName);
     for(entityId in entitiesWithController)
@@ -16,18 +15,18 @@ var RenderSystem = System.extend({
       color  = renderComponent.color;
       sprite = renderComponent.sprite;
 
-      if(color != null && this.layer != null)
+      if(color != null && this._layer != null)
       {
-        this.layer.layer.context.fillStyle = color.rgb();
-        if (UG_DEBUG) console.log('Set Entity [' + entityId + '] color to [' + color.rgb() + ']');
+        this._layer.context.fillStyle = color.rgb();
+        // if (UG_DEBUG) console.log('Set Entity [' + entityId + '] color to [' + color.rgb() + ']');
       }
       
       if(positionComponent != null && sprite != null){
-        this.layer.layer.context.fillRect(positionComponent.x, positionComponent.y, sprite.width, sprite.height);
-        if (UG_DEBUG) console.log('Set Entity [' + entityId + '] position to [' + positionComponent.print() + ']');
-        if (UG_DEBUG) console.log('Set Entity [' + entityId + '] sprite to [' + sprite.print() + ']');
+        this._layer.context.fillRect(positionComponent.x, positionComponent.y, sprite.width, sprite.height);
+      //   if (UG_DEBUG) console.log('Set Entity [' + entityId + '] position to [' + positionComponent.print() + ']');
+      //   if (UG_DEBUG) console.log('Set Entity [' + entityId + '] sprite to [' + sprite.print() + ']');
+      //   if (UG_DEBUG) console.log('Rendered Entity [' + entityId + '] at dt [' + deltaTime + ']');
       }
-      if (UG_DEBUG) console.log('Rendered Entity [' + entityId + '] at dt [' + deltaTime + ']');
       
     }
 

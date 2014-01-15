@@ -17,8 +17,12 @@ var PositionComponent = Component.extend({
     position = new PositionComponent(this.x, this.y, this.z);
     return position;
   },
+  toString: function()
+  {
+    return 'x=' + this.x + ', y=' + this.y + ', z=' + this.z;
+  },
   print: function()
   {
-    if (UG_DEBUG) console.log('x=' + this.x + ', y=' + this.y + ', z=' + this.z);
+    console.log(this.toString());
   }
 });

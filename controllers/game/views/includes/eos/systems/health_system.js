@@ -1,6 +1,6 @@
 var HealthSystem = System.extend({
-  init: function(aEntityManager){
-  	this._super(aEntityManager);
+  init: function(aEntityManager, aLayer){
+  	this._super(aEntityManager, aLayer);
     this._componentName = 'HealthComponent';
   },
   update: function(deltaTime, action){

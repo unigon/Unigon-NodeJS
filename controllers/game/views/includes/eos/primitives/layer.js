@@ -7,5 +7,11 @@ var Layer = Class.extend({
   },
   clear: function(){
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  },
+  width: function(){
+  	return this.canvas.width;
+  },
+  height: function(){
+  	return this.canvas.height;
   }
 });

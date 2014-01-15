@@ -82,13 +82,13 @@ $(document).ready( function(){
 
     // add the various sub-systems 
     // used by the game
-    healthSystem = new HealthSystem(entityManager);
+    healthSystem = new HealthSystem(entityManager, layerPlayer.layer);
     systemManager.addSystem(healthSystem);
 
-    controllerSystem = new ControllerSystem(entityManager);
+    controllerSystem = new ControllerSystem(entityManager, layerPlayer.layer);
     systemManager.addSystem(controllerSystem);
 
-    renderSystem = new RenderSystem(entityManager, layerPlayer);
+    renderSystem = new RenderSystem(entityManager, layerPlayer.layer);
     systemManager.addSystem(renderSystem);
 
     systemManager.start(); 
