@@ -113,6 +113,36 @@ $(document).ready( function(){
     }
   }
 
+  layerBackground = layers['layer_background'];
+  if(layerBackground && backgroundConfiguration){
+    backgroundEntity = entityManager.createEntity();
+   if(backgroundConfiguration.position)
+    {
+      backgroundPosition = new PositionComponent(
+      backgroundConfiguration.position.x, 
+      backgroundConfiguration.position.y,
+      0);
+      entityManager.addComponentToEntity(backgroundPosition, backgroundEntity);
+    }    
+    if(backgroundConfiguration.color && backgroundConfiguration.sprite)
+    {
+      backgroundColor  = new ColorComponent(
+        backgroundConfiguration.color.red, 
+        backgroundConfiguration.color.green, 
+        backgroundConfiguration.color.blue);
+      backgroundSprite = new SpriteComponent(
+        backgroundConfiguration.sprite.height, 
+        backgroundConfiguration.sprite.width, 
+        backgroundConfiguration.sprite.url);
+      backgroundRender = new RenderComponent(
+        layerBackground.layer,
+        backgroundSprite,
+        backgroundColor); 
+      entityManager.addComponentToEntity(backgroundRender, backgroundEntity);   
+      console.log(backgroundRender);
+    }
+  }
+
   // add the various sub-systems 
   // used by the game
   healthSystem = new HealthSystem(entityManager, layerPlayer.layer);

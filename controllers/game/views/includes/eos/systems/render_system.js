@@ -26,7 +26,12 @@ var RenderSystem = System.extend({
       }
       
       if(positionComponent != null && sprite != null){
-        renderComponent.layer.context.fillRect(positionComponent.x, positionComponent.y, sprite.width, sprite.height);
+        if(sprite.image){
+          // renderComponent.layer.context.fillRect(positionComponent.x, positionComponent.y, sprite.width, sprite.height);
+          renderComponent.layer.context.drawImage(sprite.image, positionComponent.x, positionComponent.y);
+        } else {
+          renderComponent.layer.context.fillRect(positionComponent.x, positionComponent.y, sprite.width, sprite.height);
+        }
       //   if (UG_DEBUG) console.log('Set Entity [' + entityId + '] position to [' + positionComponent.print() + ']');
       //   if (UG_DEBUG) console.log('Set Entity [' + entityId + '] sprite to [' + sprite.print() + ']');
       //   if (UG_DEBUG) console.log('Rendered Entity [' + entityId + '] at dt [' + deltaTime + ']');

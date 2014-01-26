@@ -19,43 +19,44 @@ var ControllerSystem = System.extend({
         movementComponent != null && 
         rendererComponent != null
       ){
+        movementDelta =  movementComponent.speed * deltaTime;
         if(action == controllerComponent.upKey())
         {
-          if(positionComponent.y >= movementComponent.speed){
-            positionComponent.y -= movementComponent.speed;
+          if(positionComponent.y >= movementDelta){
+            positionComponent.y -= movementDelta;
             if (UG_DEBUG) console.log(
               'Move Entity [' + entityId + 
-              '] up by [' + movementComponent.speed + 
+              '] up by [' + movementDelta + 
               '] to [' + positionComponent.toString() + ']');            
           }
         }
         if(action == controllerComponent.downKey())
         {
           if(positionComponent.y < (rendererComponent.layer.height() - rendererComponent.sprite.height)){
-            positionComponent.y += movementComponent.speed;
+            positionComponent.y += movementDelta;
             if (UG_DEBUG) console.log(
               'Move Entity [' + entityId + 
-              '] down by [' + movementComponent.speed + 
+              '] down by [' + movementDelta + 
               '] to [' + positionComponent.toString() + ']');            
           }
         }
         if(action == controllerComponent.leftKey())
         {
-          if(positionComponent.x >= movementComponent.speed){
-            positionComponent.x -= movementComponent.speed;
+          if(positionComponent.x >= movementDelta){
+            positionComponent.x -= movementDelta;
             if (UG_DEBUG) console.log(
               'Move Entity [' + entityId + 
-              '] left by [' + movementComponent.speed + 
+              '] left by [' + movementDelta + 
               '] to [' + positionComponent.toString() + ']');
           }
         }
         if(action == controllerComponent.rightKey())
         {
           if(positionComponent.x < (rendererComponent.layer.width() - rendererComponent.sprite.width)){
-            positionComponent.x += movementComponent.speed;
+            positionComponent.x += movementDelta;
             if (UG_DEBUG) console.log(
               'Move Entity [' + entityId + 
-              '] right by [' + movementComponent.speed + 
+              '] right by [' + movementDelta + 
               '] to [' + positionComponent.toString() + ']');
           }
         }

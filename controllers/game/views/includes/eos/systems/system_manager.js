@@ -23,6 +23,7 @@ var SystemManager = Class.extend({
   update: function(){
     currentTime    = this.currentTime();
     deltaTime      = currentTime - this._lastTime;
+    deltaTime      = deltaTime / 1000;
     this._lastTime = currentTime;
 
   	for(system in this._systems)

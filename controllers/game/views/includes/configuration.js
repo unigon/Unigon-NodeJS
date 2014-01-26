@@ -1,9 +1,26 @@
 var gameConfiguration = {
   canvas: {
-    width: 600,
-    height: 600
+    width: 512,
+    height: 480
   }
 };
+
+var backgroundConfiguration = {
+  position: {
+    x: 0,
+    y: 0
+  },
+  color: {
+    red: 0,
+    green: 255,
+    blue: 0,
+  },  
+  sprite: {
+    width:  512,
+    height: 480,
+    url: '/game01/assets/background.png'
+  },
+}
 
 var playerConfiguration = {
   controls: {
@@ -19,17 +36,17 @@ var playerConfiguration = {
     keyCenter: 220,
   },
   position: {
-    x: 300,
-    y: 300
+    x: 240,
+    y: 256
   },
   movement:{
-    speed: 15,
+    speed: 500,
     acceleration: 0
   },
   sprite: {
     width:  30,
     height: 30,
-    url: '/assets/sprites/player.jpg'
+    url: '/game01/assets/hero.png'
   },
   color: {
     red: 255,
@@ -46,12 +63,12 @@ var npcs = [
   {
     position: {
       x: 150,
-      y: 450
+      y: 300
     },
     sprite: {
       width: 30,
       height: 30,
-      url: '/assets/sprites/npc.jpg'
+      url: '/game01/assets/monster.png'
     },
     color: {
       red: 0,
@@ -67,7 +84,7 @@ var npcs = [
     sprite: {
       width: 30,
       height: 30,
-      url: '/assets/sprites/npc.jpg'
+      url: '/game01/assets/monster.png'
     },
     color: {
       red: 0,

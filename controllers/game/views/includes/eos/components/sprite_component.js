@@ -4,6 +4,13 @@ var SpriteComponent = Component.extend({
     this.width     = width;
     this.height    = height;
     this.imageUrl  = imageUrl;
+    this.isReady   = false;
+    self = this;
+    if(imageUrl){
+      this.image   = new Image();
+      this.image.onload = function() { self.isReady = true };
+      this.image.src = imageUrl;
+    }
   },
   print: function()
   {
