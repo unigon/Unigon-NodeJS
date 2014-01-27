@@ -1,8 +1,10 @@
 var player;
-var layers = {};
+var divLayers = {};
+var layers = [];
 var layerPlayer;
 var entityManager = new EntityManager();
 var systemManager = new SystemManager();
+var componentManager = new ComponentManager();
 var UG_DEBUG = true;
 
 $(document).keydown(function(e){
@@ -22,139 +24,43 @@ $(document).ready( function(){
       this.getContext("2d"), 
       gameConfiguration.canvas.width, 
       gameConfiguration.canvas.height );
-    layers[this.id] =  { id: this.id, layer: layer };
+    divLayers[this.id] =  { id: this.id, layer: layer };
+    layers.push(layer);
   });
   
-  // add the player to the player layer
-  layerPlayer = layers['layer_player'];
-  if(layerPlayer){
-
-    // player entity
-    // POE - plain old entity
-    playerEntity = entityManager.createEntity();
-
-    // add health to player entity
-    playerHealth = new HealthComponent(
-      playerConfiguration.points.current, 
-      playerConfiguration.points.maximum);
-    entityManager.addComponentToEntity(playerHealth, playerEntity);
-
-    // add render to player
-    // consists of color and sprite
-    playerColor  = new ColorComponent(
-      playerConfiguration.color.red, 
-      playerConfiguration.color.green, 
-      playerConfiguration.color.blue);
-    playerSprite = new SpriteComponent(
-      playerConfiguration.sprite.height, 
-      playerConfiguration.sprite.width, 
-      playerConfiguration.sprite.url);
-    playerRender = new RenderComponent(
-      layerPlayer.layer,
-      playerSprite,
-      playerColor); 
-    entityManager.addComponentToEntity(playerRender, playerEntity);    
-
-    // add position to player
-    playerPosition = new PositionComponent(
-      playerConfiguration.position.x, 
-      playerConfiguration.position.y,
-      0);
-    entityManager.addComponentToEntity(playerPosition, playerEntity);
-
-    // add movement to player
-    playerMovement = new MovementComponent(
-      playerConfiguration.movement.speed, 
-      playerConfiguration.movement.acceleration);
-    entityManager.addComponentToEntity(playerMovement, playerEntity);
-
-    // add controller to player
-    playerController = new ControllerComponent(
-      playerConfiguration.controls.keyUp,
-      playerConfiguration.controls.keyRight,
-      playerConfiguration.controls.keyDown,
-      playerConfiguration.controls.keyLeft,
-      playerConfiguration.controls.keyActionPrimary,
-      playerConfiguration.controls.keyCenter
-      );
-    entityManager.addComponentToEntity(playerController, playerEntity);
-
-  }
-
-  layerNpcs = layers['layer_player'];
-  if(layerNpcs && npcs){
-    for(npcId in npcs){
-      npcConfiguration = npcs[npcId];
-      npcEntity = entityManager.createEntity();
-      if(npcConfiguration.position)
-      {
-        npcPosition = new PositionComponent(
-        npcConfiguration.position.x, 
-        npcConfiguration.position.y,
-        0);
-        entityManager.addComponentToEntity(npcPosition, npcEntity);
+  // load up the configuration
+  if(layersConfiguration){
+    for(layerName in layersConfiguration){
+      layerData = layersConfiguration[layerName];
+      layer     = divLayers[layerName];
+      if (layer){
+        for(aId in layerData)
+        {
+          entity = entityManager.createEntity();
+          for(componentName in layerData[aId]){
+            componentData = layerData[aId][componentName];
+            component = componentManager.createComponent(componentName, componentData, layer.layer);
+            if(component){
+              entityManager.addComponentToEntity(component, entity);
+            }
+          }
+        }
+      } else {
+        console.warn('Unable to find a div layer by id [' + layerName + ']');
       }
-      if(npcConfiguration.color && npcConfiguration.sprite)
-      {
-        npcColor  = new ColorComponent(
-          npcConfiguration.color.red, 
-          npcConfiguration.color.green, 
-          npcConfiguration.color.blue);
-        npcSprite = new SpriteComponent(
-          npcConfiguration.sprite.height, 
-          npcConfiguration.sprite.width, 
-          npcConfiguration.sprite.url);
-        npcRender = new RenderComponent(
-          layerNpcs.layer,
-          npcSprite,
-          npcColor); 
-        entityManager.addComponentToEntity(npcRender, npcEntity);   
-      }
-    }
-  }
-
-  layerBackground = layers['layer_background'];
-  if(layerBackground && backgroundConfiguration){
-    backgroundEntity = entityManager.createEntity();
-   if(backgroundConfiguration.position)
-    {
-      backgroundPosition = new PositionComponent(
-      backgroundConfiguration.position.x, 
-      backgroundConfiguration.position.y,
-      0);
-      entityManager.addComponentToEntity(backgroundPosition, backgroundEntity);
-    }    
-    if(backgroundConfiguration.color && backgroundConfiguration.sprite)
-    {
-      backgroundColor  = new ColorComponent(
-        backgroundConfiguration.color.red, 
-        backgroundConfiguration.color.green, 
-        backgroundConfiguration.color.blue);
-      backgroundSprite = new SpriteComponent(
-        backgroundConfiguration.sprite.height, 
-        backgroundConfiguration.sprite.width, 
-        backgroundConfiguration.sprite.url);
-      backgroundRender = new RenderComponent(
-        layerBackground.layer,
-        backgroundSprite,
-        backgroundColor); 
-      entityManager.addComponentToEntity(backgroundRender, backgroundEntity);   
-      console.log(backgroundRender);
     }
   }
 
   // add the various sub-systems 
   // used by the game
-  healthSystem = new HealthSystem(entityManager, layerPlayer.layer);
+  healthSystem = new HealthSystem(entityManager, layers);
   systemManager.addSystem(healthSystem);
 
-  controllerSystem = new ControllerSystem(entityManager, layerPlayer.layer);
+  controllerSystem = new ControllerSystem(entityManager, layers);
   systemManager.addSystem(controllerSystem);
 
-  renderSystem = new RenderSystem(entityManager, [layerPlayer.layer, layerNpcs.layer]);
+  renderSystem = new RenderSystem(entityManager, layers);
   systemManager.addSystem(renderSystem);
 
   systemManager.start(); 
-
-  
 });

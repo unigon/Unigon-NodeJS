@@ -1,7 +1,7 @@
 var System = Class.extend({
-  init: function(aEntityManager, aLayer){
+  init: function(aEntityManager, aLayers){
     this._entityManager  = aEntityManager;
-    this._layer          = aLayer;
+    this._layers          = aLayers;
   },
   update: function(deltaTime){
   	// intentionally do nothing

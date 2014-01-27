@@ -1,13 +1,12 @@
 var RenderSystem = System.extend({
   init: function(aEntityManager, aLayers){
-    this._super(aEntityManager, null);
+    this._super(aEntityManager, aLayers);
     this._componentName = 'RenderComponent';
-    this.layers = aLayers;
   },
   update: function(deltaTime, action){
-    for(layer in this.layers)
+    for(layer in this._layers)
     {
-      this.layers[layer].clear();
+      this._layers[layer].clear();
     }
    
     entitiesWithRenderComponent = this._entityManager.getEntitiesForComponent(this._componentName);

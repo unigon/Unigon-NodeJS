@@ -1,6 +1,6 @@
 var ControllerSystem = System.extend({
-  init: function(aEntityManager, aLayer){
-    this._super(aEntityManager, aLayer);
+  init: function(aEntityManager, aLayers){
+    this._super(aEntityManager, aLayers);
     this._componentName = 'ControllerComponent';
   },
   update: function(deltaTime, action){
