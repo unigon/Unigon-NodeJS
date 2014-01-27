@@ -81,7 +81,7 @@ $(document).ready( function(){
 
   }
 
-  layerNpcs = layers['layer_npc'];
+  layerNpcs = layers['layer_player'];
   if(layerNpcs && npcs){
     for(npcId in npcs){
       npcConfiguration = npcs[npcId];

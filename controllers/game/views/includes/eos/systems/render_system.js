@@ -10,9 +10,20 @@ var RenderSystem = System.extend({
       this.layers[layer].clear();
     }
    
-    entitiesWithController = this._entityManager.getEntitiesForComponent(this._componentName);
-    for(entityId in entitiesWithController)
+    entitiesWithRenderComponent = this._entityManager.getEntitiesForComponent(this._componentName);
+    if (entitiesWithRenderComponent == 'undefined') return;
+    entityIds = Object.keys(entitiesWithRenderComponent);
+    self = this;
+    // ensure we render in order of depth
+    // sprites higher on the screen (lower y) are deeper for 2D
+    entityIds.sort(function(firstId, secondId){
+      firstPositionComponent    = self._entityManager.getComponentForEntity('PositionComponent', firstId);
+      secondPositionComponent   = self._entityManager.getComponentForEntity('PositionComponent', secondId);
+      return firstPositionComponent.y - secondPositionComponent.y;
+    });
+    for(id in entityIds)
     {
+      entityId            = entityIds[id];
       positionComponent   = this._entityManager.getComponentForEntity('PositionComponent', entityId);
       renderComponent     = this._entityManager.getComponentForEntity('RenderComponent', entityId);
 
@@ -27,7 +38,6 @@ var RenderSystem = System.extend({
       
       if(positionComponent != null && sprite != null){
         if(sprite.image){
-          // renderComponent.layer.context.fillRect(positionComponent.x, positionComponent.y, sprite.width, sprite.height);
           renderComponent.layer.context.drawImage(sprite.image, positionComponent.x, positionComponent.y);
         } else {
           renderComponent.layer.context.fillRect(positionComponent.x, positionComponent.y, sprite.width, sprite.height);
