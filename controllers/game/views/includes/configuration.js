@@ -8,22 +8,66 @@ var gameConfiguration = {
 var layersConfiguration = {
   layer_background: [
     {
-      position: {
-        x: 0,
-        y: 0
-      },
-      render:{
+      // position: {
+      //   x: 0,
+      //   y: 0
+      // },
+      // render:{
+      //   color: {
+      //     red: 0,
+      //     green: 255,
+      //     blue: 0,
+      //   },  
+      //   sprite: {
+      //     width:  512,
+      //     height: 480,
+      //     url: '/game01/assets/background.png'
+      //   }
+      // },
+      sprite_map: {
+        position: {
+          x: 0,
+          y: 0
+        },
         color: {
           red: 0,
           green: 255,
           blue: 0,
-        },  
-        sprite: {
-          width:  512,
-          height: 480,
-          url: '/game01/assets/background.png'
-        }
-      }
+        },
+        size: {
+          width: 32,
+          height: 32,
+        },
+        sprites: {
+          tree: {
+            width: 32,
+            height: 32,
+            url: '/game01/assets/tree.png',
+          },
+          grass: {
+            width: 32,
+            height: 32,
+            url: '/game01/assets/grass.png',
+          } 
+        },
+        map: [
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass',  'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+        ]
+      }      
     }
   ],
   layer_player: [
@@ -100,7 +144,25 @@ var layersConfiguration = {
           blue: 255,
         }
       }
-    }
+    },
+    {
+      position: {
+        x: 320,
+        y: 360
+      },
+      render: {
+        sprite: {
+          width: 32,
+          height: 32,
+          url: '/game01/assets/tree.png'
+        },
+        color: {
+          red: 0,
+          green: 255,
+          blue: 255,
+        }
+      }
+    }  
   ]
 }
 

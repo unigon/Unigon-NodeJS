@@ -4,7 +4,7 @@ var layers = [];
 var layerPlayer;
 var entityManager = new EntityManager();
 var systemManager = new SystemManager();
-var componentManager = new ComponentManager();
+var componentManager = new ComponentManager(entityManager);
 var UG_DEBUG = false;
 
 $(document).keydown(function(e){
@@ -32,25 +32,7 @@ $(document).ready( function(){
   
   // load up the configuration
   if(layersConfiguration){
-    for(layerName in layersConfiguration){
-      layerData = layersConfiguration[layerName];
-      layer     = divLayers[layerName];
-      if (layer){
-        for(aId in layerData)
-        {
-          entity = entityManager.createEntity();
-          for(componentName in layerData[aId]){
-            componentData = layerData[aId][componentName];
-            component = componentManager.createComponent(componentName, componentData, layer.layer);
-            if(component){
-              entityManager.addComponentToEntity(component, entity);
-            }
-          }
-        }
-      } else {
-        console.warn('Unable to find a div layer by id [' + layerName + ']');
-      }
-    }
+    componentManager.createLayers(layersConfiguration);
   }
 
   // add the various sub-systems 
