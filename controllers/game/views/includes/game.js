@@ -5,7 +5,7 @@ var layerPlayer;
 var entityManager = new EntityManager();
 var systemManager = new SystemManager();
 var componentManager = new ComponentManager();
-var UG_DEBUG = true;
+var UG_DEBUG = false;
 
 $(document).keydown(function(e){
   systemManager.setActionKey(e.keyCode);
@@ -13,9 +13,11 @@ $(document).keydown(function(e){
 
 $(document).ready( function(){
   // configure the DIV id="game"
-  game = $('#game');
+  game = $('.game_div');
   game.width(  gameConfiguration.canvas.width  + 'px' );
   game.height( gameConfiguration.canvas.height + 'px' );
+
+  $('#layer_loading').show();
 
   // load DIV layers with class="game_layer"
   $('.game_layer').each(function(){
@@ -63,4 +65,6 @@ $(document).ready( function(){
   systemManager.addSystem(renderSystem);
 
   systemManager.start(); 
+
+  $('#layer_loading').fadeOut(600);
 });

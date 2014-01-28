@@ -71,6 +71,22 @@ h1 a {
   top: 0;
 }
 
+#layer_loading{
+  z-index: 3;
+  background: green;
+  padding: 0px;
+  margin: 0px;
+  position: relative;
+}
+
+#layer_loading #loading{
+  font-family: 'Courier';
+  padding-top: 220px;
+  text-align: center;
+  margin: 0px auto 0px auto;
+  font-size: 36px;
+}
+
 #layer_player{
   z-index: 2;
 }

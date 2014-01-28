@@ -1,7 +1,9 @@
 h1 #{game.name} 
   a(href = "/game/" + game.id + "/edit") edit
 
-#game
+#game(class = 'game_div')
+  #layer_loading(class = 'game_div') 
+    #loading Loading. . .
   canvas(id = 'layer_player', class = 'game_layer')
   canvas(id = 'layer_npc', class = 'game_layer')
   canvas(id = 'layer_background', class = 'game_layer')
