@@ -37,7 +37,18 @@ var RenderSystem = System.extend({
       
       if(positionComponent != null && sprite != null){
         if(sprite.image){
-          renderComponent.layer.context.drawImage(sprite.image, positionComponent.x, positionComponent.y);
+          sprite.nextFrame(deltaTime);
+          renderComponent.layer.context.drawImage(
+            sprite.image, 
+            sprite.frameX, 
+            sprite.frameY, 
+            sprite.frameWidth, 
+            sprite.frameHeight, 
+            positionComponent.x, 
+            positionComponent.y, 
+            sprite.width, 
+            sprite.height
+            );
         } else {
           renderComponent.layer.context.fillRect(positionComponent.x, positionComponent.y, sprite.width, sprite.height);
         }
@@ -48,5 +59,5 @@ var RenderSystem = System.extend({
       
     }
 
-  },
+  }
 });

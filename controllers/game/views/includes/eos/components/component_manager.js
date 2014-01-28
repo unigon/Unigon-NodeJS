@@ -120,7 +120,8 @@ var ComponentManager = Class.extend({
         component = new SpriteComponent(
           componentData.width, 
           componentData.height, 
-          componentData.url
+          componentData.url,
+          componentData.frames
           );
         break;
       default:

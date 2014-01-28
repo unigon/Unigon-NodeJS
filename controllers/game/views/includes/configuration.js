@@ -147,6 +147,30 @@ var layersConfiguration = {
     },
     {
       position: {
+        x: 120,
+        y: 260
+      },
+      render: {
+        sprite: {
+          width: 20,
+          height: 20,
+          url: '/game01/assets/coins.png',
+          frames: {
+            sequence: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            width: 44,
+            height: 40,
+            speed: 1/12,
+          }
+        },
+        color: {
+          red: 0,
+          green: 255,
+          blue: 255,
+        }
+      }
+    },    
+    {
+      position: {
         x: 320,
         y: 360
       },
