@@ -17,6 +17,9 @@ $(document).ready( function(){
   game.width(  gameConfiguration.canvas.width  + 'px' );
   game.height( gameConfiguration.canvas.height + 'px' );
 
+  camera = new Camera(gameConfiguration.camera);
+  map    = new Map(gameConfiguration.map);
+
   $('#layer_loading').show();
 
   // load DIV layers with class="game_layer"
@@ -41,9 +44,13 @@ $(document).ready( function(){
   systemManager.addSystem({name: 'HealthSystem', system: healthSystem});
 
   controllerSystem = new ControllerSystem(entityManager, layers);
+  controllerSystem.addCamera(camera);
+  controllerSystem.addMap(map);
   systemManager.addSystem({name: 'ControllerSystem', system: controllerSystem});
 
   renderSystem = new RenderSystem(entityManager, layers);
+  renderSystem.addCamera(camera);
+  renderSystem.addMap(map);
   systemManager.addSystem({name: 'RenderSystem', system: renderSystem});
 
   systemManager.start(); 

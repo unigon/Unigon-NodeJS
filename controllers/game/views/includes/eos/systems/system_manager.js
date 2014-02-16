@@ -8,6 +8,7 @@ var SystemManager = Class.extend({
     this._logged    = 0;
     this._actionKey = null;
     this._messages  = new Messages();
+    this._camera    = null;
   },
   start: function(){
     this.update();

@@ -3,6 +3,12 @@ var RenderSystem = System.extend({
     this._super(aEntityManager, aLayers);
     this._componentName = 'RenderComponent';
   },
+  addCamera: function(camera){
+    this._camera = camera;
+  },
+  addMap: function(map){
+    this._map = map;
+  },
   update: function(deltaTime, action, messages){
     for(layer in this._layers)
     {
@@ -35,6 +41,8 @@ var RenderSystem = System.extend({
       }
       
       if(positionComponent != null && sprite != null){
+        relativeX = positionComponent.x - this._camera.leftEdge();
+        relativeY = positionComponent.y - this._camera.topEdge();
         if(sprite.image){
           sprite.nextFrame(deltaTime);
           renderComponent.layer.context.drawImage(
@@ -43,13 +51,13 @@ var RenderSystem = System.extend({
             sprite.frameY, 
             sprite.frameWidth, 
             sprite.frameHeight, 
-            positionComponent.x, 
-            positionComponent.y, 
+            relativeX, 
+            relativeY, 
             sprite.width, 
             sprite.height
             );
         } else {
-          renderComponent.layer.context.fillRect(positionComponent.x, positionComponent.y, sprite.width, sprite.height);
+          renderComponent.layer.context.fillRect(relativeX, relativeY, sprite.width, sprite.height);
         }
       }
       

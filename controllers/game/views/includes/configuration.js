@@ -2,6 +2,16 @@ var gameConfiguration = {
   canvas: {
     width: 512,
     height: 480
+  },
+  camera: {
+    x: 0,
+    y: 0,
+    width: 512,
+    height: 480,
+  },
+  map:{
+    height: 4800,
+    width: 5120,
   }
 };
 

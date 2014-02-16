@@ -3,7 +3,13 @@ var ControllerSystem = System.extend({
     this._super(aEntityManager, aLayers);
     this._componentName = 'ControllerComponent';
   },
-  update: function(deltaTime, action, messages){
+  addCamera: function(camera){
+    this._camera = camera;
+  },  
+  addMap: function(map){
+    this._map = map;
+  },  
+  update: function(deltaTime, action, messages, camara){
     if(action == null) return;
 
     entitiesWithController = this._entityManager.getEntitiesForComponent(this._componentName);
@@ -23,8 +29,12 @@ var ControllerSystem = System.extend({
         switch(action)
         {
           case controllerComponent.upKey():
+            if(this._camera.topEdge() >= movementDelta){
+              this._camera.move(0, -1 * movementDelta);
+            }
             if(positionComponent.y >= movementDelta){
               positionComponent.y -= movementDelta;
+              
               messages.add('console', 
                 'Move Entity [' + entityId + 
                 '] up by [' + movementDelta + 
@@ -32,7 +42,10 @@ var ControllerSystem = System.extend({
             }
             break;        
           case controllerComponent.downKey():
-            if(positionComponent.y < (rendererComponent.layer.height() - rendererComponent.sprite.height)){
+            if(this._camera.topEdge() < (this._map.height() - this._camera.height())){
+              this._camera.move(0, movementDelta);
+            }
+            if(positionComponent.y < (this._map.height() - rendererComponent.sprite.height)){
               positionComponent.y += movementDelta;
               messages.add('console', 
                 'Move Entity [' + entityId + 
@@ -41,6 +54,10 @@ var ControllerSystem = System.extend({
             }
             break;
           case controllerComponent.leftKey():
+            if(this._camera.leftEdge() >= movementDelta)
+            {
+              this._camera.move(-1 * movementDelta, 0);              
+            }
             if(positionComponent.x >= movementDelta){
               positionComponent.x -= movementDelta;
               messages.add('console', 
@@ -50,7 +67,10 @@ var ControllerSystem = System.extend({
             }
             break;
           case controllerComponent.rightKey():
-            if(positionComponent.x < (rendererComponent.layer.width() - rendererComponent.sprite.width)){
+            if(this._camera.rightEdge() < (this._map.width() - this._camera.width())){
+              this._camera.move(movementDelta, 0);
+            }
+            if(positionComponent.x < (this._map.width() - rendererComponent.sprite.width)){
               positionComponent.x += movementDelta;
               messages.add('console', 
                 'Move Entity [' + entityId + 
@@ -60,11 +80,13 @@ var ControllerSystem = System.extend({
             break;
           case controllerComponent.secondaryActionKey():
             positionComponent.reinit();
+            this._camera.reinit();
             messages.add('console', 
               'Activate Entity [' + entityId + '] secondary action');
             break;
           case controllerComponent.primaryActionKey():
             positionComponent.reinit();
+            this._camera.reinit();
             messages.add('console', 
               'Activate Entity [' + entityId + '] primary action');
             break;
