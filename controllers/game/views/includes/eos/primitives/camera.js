@@ -71,8 +71,8 @@ var Camera = Class.extend({
     this._move(0,1);
   },
   center: function(positionComponent){
-    this._x = positionComponent.x - this._width / 2;
-    this._y = positionComponent.y - this._height / 2;
+    this._x = Math.max(positionComponent.x - this._width / 2, 0);
+    this._y = Math.max(positionComponent.y - this._height / 2, 0);
     this._setBounds();
   },
   copy: function(){

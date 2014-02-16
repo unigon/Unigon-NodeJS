@@ -1,13 +1,13 @@
 var gameConfiguration = {
   canvas: {
-    width: 512,
-    height: 480
+    width: 960,
+    height: 960
   },
   camera: {
     x: 0,
     y: 0,
-    width: 512,
-    height: 480,
+    width: 960,
+    height: 960,
     padding: {
       top: 128,
       bottom: 128,
