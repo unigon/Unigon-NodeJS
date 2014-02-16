@@ -135,6 +135,9 @@ h1 a {
   height: 20px;
   z-index: 5;
   opacity: 0.5;
+  text-align: center;
+  line-height: 20px;
+  font-weight: bold;
 
   background: #ccc;
   border: 1px solid #aaa;
