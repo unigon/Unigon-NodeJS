@@ -3,7 +3,7 @@ var HealthSystem = System.extend({
   	this._super(aEntityManager, aLayers);
     this._componentName = 'HealthComponent';
   },
-  update: function(deltaTime, action){
+  update: function(deltaTime, action, messages){
   	entitiesWithHealth = this._entityManager.getEntitiesForComponent(this._componentName);
 
   	for(entity in entitiesWithHealth)

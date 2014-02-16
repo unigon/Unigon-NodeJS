@@ -3,7 +3,7 @@ var ControllerSystem = System.extend({
     this._super(aEntityManager, aLayers);
     this._componentName = 'ControllerComponent';
   },
-  update: function(deltaTime, action){
+  update: function(deltaTime, action, messages){
     if(action == null) return;
 
     entitiesWithController = this._entityManager.getEntitiesForComponent(this._componentName);
@@ -20,57 +20,56 @@ var ControllerSystem = System.extend({
         rendererComponent != null
       ){
         movementDelta =  movementComponent.speed * deltaTime;
-        if(action == controllerComponent.upKey())
+        switch(action)
         {
-          if(positionComponent.y >= movementDelta){
-            positionComponent.y -= movementDelta;
-            if (UG_DEBUG) console.log(
-              'Move Entity [' + entityId + 
-              '] up by [' + movementDelta + 
-              '] to [' + positionComponent.toString() + ']');            
-          }
-        }
-        if(action == controllerComponent.downKey())
-        {
-          if(positionComponent.y < (rendererComponent.layer.height() - rendererComponent.sprite.height)){
-            positionComponent.y += movementDelta;
-            if (UG_DEBUG) console.log(
-              'Move Entity [' + entityId + 
-              '] down by [' + movementDelta + 
-              '] to [' + positionComponent.toString() + ']');            
-          }
-        }
-        if(action == controllerComponent.leftKey())
-        {
-          if(positionComponent.x >= movementDelta){
-            positionComponent.x -= movementDelta;
-            if (UG_DEBUG) console.log(
-              'Move Entity [' + entityId + 
-              '] left by [' + movementDelta + 
-              '] to [' + positionComponent.toString() + ']');
-          }
-        }
-        if(action == controllerComponent.rightKey())
-        {
-          if(positionComponent.x < (rendererComponent.layer.width() - rendererComponent.sprite.width)){
-            positionComponent.x += movementDelta;
-            if (UG_DEBUG) console.log(
-              'Move Entity [' + entityId + 
-              '] right by [' + movementDelta + 
-              '] to [' + positionComponent.toString() + ']');
-          }
-        }
-        if(action == controllerComponent.secondaryActionKey())
-        {
-          positionComponent.reinit();
-          if (UG_DEBUG) console.log(
-            'Activate Entity [' + entityId + '] secondary action');
-        }
-        if(action == controllerComponent.primaryActionKey())
-        {
-          positionComponent.reinit();
-          if (UG_DEBUG) console.log(
-            'Activate Entity [' + entityId + '] primary action');
+          case controllerComponent.upKey():
+            if(positionComponent.y >= movementDelta){
+              positionComponent.y -= movementDelta;
+              messages.add('console', 
+                'Move Entity [' + entityId + 
+                '] up by [' + movementDelta + 
+                '] to [' + positionComponent.toString() + ']');            
+            }
+            break;        
+          case controllerComponent.downKey():
+            if(positionComponent.y < (rendererComponent.layer.height() - rendererComponent.sprite.height)){
+              positionComponent.y += movementDelta;
+              messages.add('console', 
+                'Move Entity [' + entityId + 
+                '] down by [' + movementDelta + 
+                '] to [' + positionComponent.toString() + ']');            
+            }
+            break;
+          case controllerComponent.leftKey():
+            if(positionComponent.x >= movementDelta){
+              positionComponent.x -= movementDelta;
+              messages.add('console', 
+                'Move Entity [' + entityId + 
+                '] left by [' + movementDelta + 
+                '] to [' + positionComponent.toString() + ']');
+            }
+            break;
+          case controllerComponent.rightKey():
+            if(positionComponent.x < (rendererComponent.layer.width() - rendererComponent.sprite.width)){
+              positionComponent.x += movementDelta;
+              messages.add('console', 
+                'Move Entity [' + entityId + 
+                '] right by [' + movementDelta + 
+                '] to [' + positionComponent.toString() + ']');
+            }
+            break;
+          case controllerComponent.secondaryActionKey():
+            positionComponent.reinit();
+            messages.add('console', 
+              'Activate Entity [' + entityId + '] secondary action');
+            break;
+          case controllerComponent.primaryActionKey():
+            positionComponent.reinit();
+            messages.add('console', 
+              'Activate Entity [' + entityId + '] primary action');
+            break;
+          default:
+            break;
         }
       }
     }

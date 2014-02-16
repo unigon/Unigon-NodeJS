@@ -3,7 +3,7 @@ var System = Class.extend({
     this._entityManager  = aEntityManager;
     this._layers          = aLayers;
   },
-  update: function(deltaTime){
+  update: function(deltaTime, action){
   	// intentionally do nothing
   }
 });

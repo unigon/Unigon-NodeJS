@@ -7,12 +7,17 @@ var SystemManager = Class.extend({
     this._systems   = [];
     this._logged    = 0;
     this._actionKey = null;
+    this._messages  = new Messages();
   },
   start: function(){
     this.update();
   },
-  addSystem: function(aSystem){
-    this._systems.push(aSystem);
+  addSystem: function(systemInfo){
+    if(!this.getSystem(systemInfo.name)){
+      this._systems.push(systemInfo);
+    } else {
+      console.error('UG_ERROR - System by name [' + systemInfo.name + '] already exists.');
+    }
   },
   setActionKey: function(aKey){
     this._actionKey = aKey;
@@ -20,15 +25,25 @@ var SystemManager = Class.extend({
   currentTime: function(){
     return new Date().getTime();
   },
+  getSystem: function(name){
+    for(id in this._systems)
+    {
+      if(this._systems[id].name == name){
+        return this._systems[id].system;
+      }
+    }
+    console.warn('UG_WARN - Unable to find a system by name [' + name + ']'); 
+  },
   update: function(){
     currentTime    = this.currentTime();
     deltaTime      = currentTime - this._lastTime;
     deltaTime      = deltaTime / 1000;
     this._lastTime = currentTime;
 
-  	for(system in this._systems)
+  	for(id in this._systems)
     {
-      this._systems[system].update(deltaTime, this._actionKey);
+      this._systems[id].system.update(deltaTime, this._actionKey, this._messages);
+      this._messages.update();
     }
 
     this._actionKey = null;

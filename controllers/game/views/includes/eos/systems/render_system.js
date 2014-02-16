@@ -3,7 +3,7 @@ var RenderSystem = System.extend({
     this._super(aEntityManager, aLayers);
     this._componentName = 'RenderComponent';
   },
-  update: function(deltaTime, action){
+  update: function(deltaTime, action, messages){
     for(layer in this._layers)
     {
       this._layers[layer].clear();
@@ -32,7 +32,6 @@ var RenderSystem = System.extend({
       if(color != null && renderComponent.layer != null)
       {
         renderComponent.layer.context.fillStyle = color.rgb();
-        // if (UG_DEBUG) console.log('Set Entity [' + entityId + '] color to [' + color.rgb() + ']');
       }
       
       if(positionComponent != null && sprite != null){
@@ -52,9 +51,6 @@ var RenderSystem = System.extend({
         } else {
           renderComponent.layer.context.fillRect(positionComponent.x, positionComponent.y, sprite.width, sprite.height);
         }
-      //   if (UG_DEBUG) console.log('Set Entity [' + entityId + '] position to [' + positionComponent.print() + ']');
-      //   if (UG_DEBUG) console.log('Set Entity [' + entityId + '] sprite to [' + sprite.print() + ']');
-      //   if (UG_DEBUG) console.log('Rendered Entity [' + entityId + '] at dt [' + deltaTime + ']');
       }
       
     }
