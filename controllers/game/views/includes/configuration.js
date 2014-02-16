@@ -95,7 +95,7 @@ var layersConfiguration = {
         keyCenter: 220,
       },
       position: {
-        x: 240,
+        x: 256,
         y: 256
       },
       movement:{
@@ -104,8 +104,8 @@ var layersConfiguration = {
       },
       render:{
         sprite: {
-          width:  30,
-          height: 30,
+          width:  32,
+          height: 32,
           url: '/game01/assets/hero.png'
         },
         color: {

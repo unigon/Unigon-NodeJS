@@ -5,10 +5,13 @@ var Camera = Class.extend({
     this._width  = cameraConfig.width;
     this._height = cameraConfig.height;
     this._bounds = {};
-    this._bounds.upperLeft   = {x: cameraConfig.x, y: cameraConfig.y};
-    this._bounds.upperRight  = {x: cameraConfig.x + cameraConfig.width, y: cameraConfig.y};
-    this._bounds.bottomLeft  = {x: cameraConfig.x, y: cameraConfig.y + cameraConfig.height};
-    this._bounds.bottomRight = {x: cameraConfig.x + cameraConfig.width, y: cameraConfig.y + cameraConfig.height};
+    this._setBounds();
+  },
+  _setBounds: function(){
+    this._bounds.upperLeft   = {x: this._x, y: this._y};
+    this._bounds.upperRight  = {x: this._x + this._width, y: this._y};
+    this._bounds.bottomLeft  = {x: this._x, y: this._y + this._height};
+    this._bounds.bottomRight = {x: this._x + this._width, y: this._y + this._height};
   },
   leftEdge: function(){
     return this._bounds.upperLeft.x;
@@ -50,8 +53,10 @@ var Camera = Class.extend({
   moveDown: function(){
     this._move(0,1);
   },
-  reinit: function(){
-
+  center: function(positionComponent){
+    this._x = positionComponent.x - this._width / 2;
+    this._y = positionComponent.y - this._height / 2;
+    this._setBounds();
   },
   copy: function(){
     camera = new CameraComponent(this._x, this._y, this._width, this._height);

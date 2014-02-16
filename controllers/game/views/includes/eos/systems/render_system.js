@@ -41,8 +41,6 @@ var RenderSystem = System.extend({
       }
       
       if(positionComponent != null && sprite != null){
-        relativeX = positionComponent.x - this._camera.leftEdge();
-        relativeY = positionComponent.y - this._camera.topEdge();
         if(sprite.image){
           sprite.nextFrame(deltaTime);
           renderComponent.layer.context.drawImage(
@@ -51,17 +49,25 @@ var RenderSystem = System.extend({
             sprite.frameY, 
             sprite.frameWidth, 
             sprite.frameHeight, 
-            relativeX, 
-            relativeY, 
+            this._relativeX(positionComponent), 
+            this._relativeY(positionComponent), 
             sprite.width, 
             sprite.height
             );
         } else {
-          renderComponent.layer.context.fillRect(relativeX, relativeY, sprite.width, sprite.height);
+          renderComponent.layer.context.fillRect(this._relativeX(positionComponent), this._relativeY(positionComponent), sprite.width, sprite.height);
         }
       }
       
     }
 
+  },
+  _relativeX: function(position){
+    relativeX = position.x - this._camera.leftEdge();
+    return relativeX;
+  },
+  _relativeY: function(position){
+    relativeY = position.y - this._camera.topEdge();
+    return relativeY;
   }
 });
