@@ -2,6 +2,7 @@ var ControllerSystem = System.extend({
   init: function(aEntityManager, aLayers){
     this._super(aEntityManager, aLayers);
     this._componentName = 'ControllerComponent';
+    this._gamepadSupportAvailable = Modernizr.gamepads;
   },
   addCamera: function(camera){
     this._camera = camera;
@@ -33,8 +34,8 @@ var ControllerSystem = System.extend({
               positionComponent.y -= movementDelta;
               
               messages.add('console', 
-                'Move Entity [' + entityId + 
-                '] up by [' + movementDelta + 
+                'Move <b>Entity [' + entityId + 
+                '] up</b> by [' + movementDelta + 
                 '] to [' + positionComponent.toString() + ']');            
             }
             if(this._camera.topEdge() >= movementDelta){
@@ -48,8 +49,8 @@ var ControllerSystem = System.extend({
             if(positionComponent.y < (this._map.height() - rendererComponent.sprite.height)){
               positionComponent.y += movementDelta;
               messages.add('console', 
-                'Move Entity [' + entityId + 
-                '] down by [' + movementDelta + 
+                'Move <b>Entity [' + entityId + 
+                '] down</b> by [' + movementDelta + 
                 '] to [' + positionComponent.toString() + ']');            
             }
             if(this._camera.topEdge() < (this._map.height() - this._camera.height())){
@@ -63,8 +64,8 @@ var ControllerSystem = System.extend({
             if(positionComponent.x >= movementDelta){
               positionComponent.x -= movementDelta;
               messages.add('console', 
-                'Move Entity [' + entityId + 
-                '] left by [' + movementDelta + 
+                'Move <b>Entity [' + entityId + 
+                '] left</b> by [' + movementDelta + 
                 '] to [' + positionComponent.toString() + ']');
             }
             if(this._camera.leftEdge() >= movementDelta)
@@ -79,8 +80,8 @@ var ControllerSystem = System.extend({
             if(positionComponent.x < (this._map.width() - rendererComponent.sprite.width)){
               positionComponent.x += movementDelta;
               messages.add('console', 
-                'Move Entity [' + entityId + 
-                '] right by [' + movementDelta + 
+                'Move <b>Entity [' + entityId + 
+                '] right</b> by [' + movementDelta + 
                 '] to [' + positionComponent.toString() + ']');
             }
             if(this._camera.rightEdge() < (this._map.width() - this._camera.width())){
@@ -94,13 +95,13 @@ var ControllerSystem = System.extend({
             positionComponent.reinit();
             this._camera.center(positionComponent, this._map);
             messages.add('console', 
-              'Activate Entity [' + entityId + '] secondary action');
+              'Activate <b>Entity [' + entityId + ']</b> secondary action');
             break;
           case controllerComponent.primaryActionKey():
             positionComponent.reinit();
             this._camera.center(positionComponent, this._map);
             messages.add('console', 
-              'Activate Entity [' + entityId + '] primary action');
+              'Activate <b>Entity [' + entityId + ']</b> primary action');
             break;
           default:
             break;

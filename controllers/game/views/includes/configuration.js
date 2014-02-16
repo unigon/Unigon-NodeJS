@@ -18,6 +18,14 @@ var gameConfiguration = {
   map:{
     height: 4800,
     width: 5120,
+  },
+  messages: {
+    console: {
+      emptyOnUpdate: false,
+    },
+    fps: {
+      emptyOnUpdate: true,
+    }
   }
 };
 
@@ -224,7 +232,7 @@ var layersConfiguration = {
         y: 32*11
       },
       movement:{
-        speed: 320,
+        speed: 32*20,
         acceleration: 0
       },
       render:{

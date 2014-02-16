@@ -48,6 +48,9 @@ $(document).ready( function(){
 
   // add the various sub-systems 
   // used by the game
+  messages = new Messages(gameConfiguration.messages);
+  systemManager.addMessages(messages);
+
   healthSystem = new HealthSystem(entityManager, layers);
   systemManager.addSystem({name: 'HealthSystem', system: healthSystem});
 

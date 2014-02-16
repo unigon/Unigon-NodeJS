@@ -1,5 +1,5 @@
 var SystemManager = Class.extend({
-  init: function(){
+  init: function(messages){
     startTime = new Date().getTime();
     console.log(startTime);
     this._startTime = startTime;
@@ -7,13 +7,17 @@ var SystemManager = Class.extend({
     this._systems   = [];
     this._logged    = 0;
     this._actionKey = null;
-    this._messages  = new Messages();
+    this._messages  = null;
     this._camera    = null;
     this._frames    = 0;
     this._lastFrameTime = startTime;
   },
   start: function(){
     this.update();
+  },
+  addMessages: function(messages)
+  {
+    this._messages = messages;
   },
   addSystem: function(systemInfo){
     if(!this.getSystem(systemInfo.name)){
@@ -47,7 +51,6 @@ var SystemManager = Class.extend({
   	for(id in this._systems)
     {
       this._systems[id].system.update(deltaTime, this._actionKey, this._messages);
-      this._messages.update();
     }
 
     framesInLapsedTime = currentTime - this._lastFrameTime;
@@ -56,11 +59,11 @@ var SystemManager = Class.extend({
       framesPerSecond = 1000*this._frames / framesInLapsedTime;
       this._lastFrameTime = currentTime;
       this._frames = 0;
-      this._messages.add('console', Math.floor(framesPerSecond)+ ' FPS');
-      this._messages.update();
+      this._messages.add('fps', Math.floor(framesPerSecond)+ ' FPS');
     }
 
     this._actionKey = null;
+    this._messages.update();
 
     var _uniSystemManager = this;
     window.requestAnimFrame(function(){_uniSystemManager.update();});
