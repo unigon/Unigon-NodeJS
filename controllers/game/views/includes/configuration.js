@@ -8,6 +8,12 @@ var gameConfiguration = {
     y: 0,
     width: 512,
     height: 480,
+    padding: {
+      top: 128,
+      bottom: 128,
+      left: 128,
+      right: 128,
+    }
   },
   map:{
     height: 4800,

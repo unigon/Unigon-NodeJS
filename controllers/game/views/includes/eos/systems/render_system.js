@@ -31,6 +31,7 @@ var RenderSystem = System.extend({
       entityId            = entityIds[id];
       positionComponent   = this._entityManager.getComponentForEntity('PositionComponent', entityId);
       renderComponent     = this._entityManager.getComponentForEntity('RenderComponent', entityId);
+      controllerComponent = this._entityManager.getComponentForEntity('ControllerComponent', entityId);
 
       color  = renderComponent.color;
       sprite = renderComponent.sprite;
@@ -41,6 +42,8 @@ var RenderSystem = System.extend({
       }
       
       if(positionComponent != null && sprite != null){
+        relativeX = positionComponent.x - this._camera.leftEdge();
+        relativeY = positionComponent.y - this._camera.topEdge();
         if(sprite.image){
           sprite.nextFrame(deltaTime);
           renderComponent.layer.context.drawImage(
@@ -49,25 +52,17 @@ var RenderSystem = System.extend({
             sprite.frameY, 
             sprite.frameWidth, 
             sprite.frameHeight, 
-            this._relativeX(positionComponent), 
-            this._relativeY(positionComponent), 
+            relativeX,
+            relativeY,
             sprite.width, 
             sprite.height
             );
         } else {
-          renderComponent.layer.context.fillRect(this._relativeX(positionComponent), this._relativeY(positionComponent), sprite.width, sprite.height);
+          renderComponent.layer.context.fillRect(relativeX, relativeY, sprite.width, sprite.height);
         }
       }
       
     }
-
-  },
-  _relativeX: function(position){
-    relativeX = position.x - this._camera.leftEdge();
-    return relativeX;
-  },
-  _relativeY: function(position){
-    relativeY = position.y - this._camera.topEdge();
-    return relativeY;
+    
   }
 });

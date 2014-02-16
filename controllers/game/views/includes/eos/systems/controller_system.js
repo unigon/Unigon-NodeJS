@@ -29,9 +29,6 @@ var ControllerSystem = System.extend({
         switch(action)
         {
           case controllerComponent.upKey():
-            if(this._camera.topEdge() >= movementDelta){
-              this._camera.move(0, -1 * movementDelta);
-            }
             if(positionComponent.y >= movementDelta){
               positionComponent.y -= movementDelta;
               
@@ -40,11 +37,14 @@ var ControllerSystem = System.extend({
                 '] up by [' + movementDelta + 
                 '] to [' + positionComponent.toString() + ']');            
             }
+            if(this._camera.topEdge() >= movementDelta){
+              if(positionComponent.y <= this._camera.paddedTopEdge())
+              {
+                this._camera.move(0, -1 * movementDelta);
+              }
+            }
             break;        
           case controllerComponent.downKey():
-            if(this._camera.topEdge() < (this._map.height() - this._camera.height())){
-              this._camera.move(0, movementDelta);
-            }
             if(positionComponent.y < (this._map.height() - rendererComponent.sprite.height)){
               positionComponent.y += movementDelta;
               messages.add('console', 
@@ -52,12 +52,14 @@ var ControllerSystem = System.extend({
                 '] down by [' + movementDelta + 
                 '] to [' + positionComponent.toString() + ']');            
             }
+            if(this._camera.topEdge() < (this._map.height() - this._camera.height())){
+              if(positionComponent.y >= this._camera.paddedBottomEdge())
+              {
+                this._camera.move(0, movementDelta);
+              }
+            }
             break;
           case controllerComponent.leftKey():
-            if(this._camera.leftEdge() >= movementDelta)
-            {
-              this._camera.move(-1 * movementDelta, 0);              
-            }
             if(positionComponent.x >= movementDelta){
               positionComponent.x -= movementDelta;
               messages.add('console', 
@@ -65,17 +67,27 @@ var ControllerSystem = System.extend({
                 '] left by [' + movementDelta + 
                 '] to [' + positionComponent.toString() + ']');
             }
+            if(this._camera.leftEdge() >= movementDelta)
+            {
+              if(positionComponent.x <= this._camera.paddedLeftEdge())
+              {
+                this._camera.move(-1 * movementDelta, 0);              
+              }
+            }
             break;
           case controllerComponent.rightKey():
-            if(this._camera.rightEdge() < (this._map.width() - this._camera.width())){
-              this._camera.move(movementDelta, 0);
-            }
             if(positionComponent.x < (this._map.width() - rendererComponent.sprite.width)){
               positionComponent.x += movementDelta;
               messages.add('console', 
                 'Move Entity [' + entityId + 
                 '] right by [' + movementDelta + 
                 '] to [' + positionComponent.toString() + ']');
+            }
+            if(this._camera.rightEdge() < (this._map.width() - this._camera.width())){
+              if(positionComponent.x >= this._camera.paddedRightEdge())
+              {
+                this._camera.move(movementDelta, 0);
+              }
             }
             break;
           case controllerComponent.secondaryActionKey():
