@@ -41,18 +41,28 @@ var ComponentManager = Class.extend({
     {
       for(column in spriteData.map[row])
       {
-        entity = this._entityManager.createEntity();
-        positionComponent = this.createComponent('position', { x: positionX, y: positionY}, layer);
-        this._entityManager.addComponentToEntity(positionComponent, entity);
-        this._entityManager.addComponentToEntity(colorComponent, entity);
-        spriteName = spriteData.map[row][column];
-        positionX += spriteData.size.width;
-        renderComponent = new RenderComponent(
-          layer, 
-          spriteComponents[spriteName], 
-          colorComponent
-          );
-        this._entityManager.addComponentToEntity(renderComponent, entity);
+        spriteNameCount = spriteData.map[row][column].split(';');
+        spriteName = spriteNameCount[0];
+        spriteCount = 1;
+        if(spriteNameCount.length > 1)
+        { 
+          spriteCount = spriteNameCount[1];
+        }
+        for(var count = 0; count < spriteCount; count++)
+        {
+          entity = this._entityManager.createEntity();
+          positionComponent = this.createComponent('position', { x: positionX, y: positionY}, layer);
+          this._entityManager.addComponentToEntity(positionComponent, entity);
+          this._entityManager.addComponentToEntity(colorComponent, entity);
+          positionX += spriteData.size.width;
+          renderComponent = new RenderComponent(
+            layer, 
+            spriteComponents[spriteName], 
+            colorComponent
+            );
+          this._entityManager.addComponentToEntity(renderComponent, entity);
+        }
+
       }
       positionX = spriteData.position.x;
       positionY += spriteData.size.height;

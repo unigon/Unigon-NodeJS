@@ -24,22 +24,6 @@ var gameConfiguration = {
 var layersConfiguration = {
   layer_background: [
     {
-      // position: {
-      //   x: 0,
-      //   y: 0
-      // },
-      // render:{
-      //   color: {
-      //     red: 0,
-      //     green: 255,
-      //     blue: 0,
-      //   },  
-      //   sprite: {
-      //     width:  512,
-      //     height: 480,
-      //     url: '/game01/assets/background.png'
-      //   }
-      // },
       sprite_map: {
         position: {
           x: 0,
@@ -67,21 +51,32 @@ var layersConfiguration = {
           } 
         },
         map: [
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass',  'grass', 'grass', 'grass', 'grass', 'grass'],
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
-          ['grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass','grass', 'grass', 'grass', 'grass', 'grass', 'grass', 'grass'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
+          ['grass;160'],
         ]
       }      
     }
