@@ -44,9 +44,9 @@ var RenderSystem = System.extend({
       return firstPositionComponent.y - secondPositionComponent.y;
     });
 
-    for(id in visibilyEntityIds)
+    for(var index = 0; index < visibilyEntityIds.length; index++)
     {
-      entityId            = visibilyEntityIds[id];
+      entityId            = visibilyEntityIds[index];
       positionComponent   = this._entityManager.getComponentForEntity('PositionComponent', entityId);
       renderComponent     = this._entityManager.getComponentForEntity('RenderComponent', entityId);
       sprite = renderComponent.sprite;

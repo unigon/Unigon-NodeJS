@@ -34,8 +34,8 @@ var Messages = Class.extend({
     for (target in this._targets){
       html = '';
 
-      for (id in this._targets[target].messages){
-        html += this._targets[target].messages[id];
+      for (var messageId = 0; messageId < this._targets[target].messages.length; messageId++){
+        html += this._targets[target].messages[messageId];
         html += '<br />';
       }
       if(html.length > 0 && this._targets[target].emptyOnUpdate)

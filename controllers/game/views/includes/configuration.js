@@ -25,6 +25,12 @@ var gameConfiguration = {
     },
     fps: {
       emptyOnUpdate: true,
+    },
+    storyboard: {
+      emptyOnUpdate: true,
+    },
+    health: {
+      emptyOnUpdate: true,
     }
   }
 };

@@ -48,9 +48,9 @@ var SystemManager = Class.extend({
     this._frames++;
     this._lastTime = currentTime;
 
-  	for(id in this._systems)
+  	for(var index = 0; index < this._systems.length; index++)
     {
-      this._systems[id].system.update(deltaTime, this._actionKey, this._messages);
+      this._systems[index].system.update(deltaTime, this._actionKey, this._messages);
     }
 
     framesInLapsedTime = currentTime - this._lastFrameTime;
@@ -72,7 +72,7 @@ var SystemManager = Class.extend({
 
 window.requestAnimFrame = (
   function(callback) {
-    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
+    return window.webkitRequestAnimationFrame || window.requestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
       window.setTimeout(callback, 1000 / 60);
     };
   })();
