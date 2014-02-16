@@ -31,34 +31,42 @@ var RenderSystem = System.extend({
       entityId            = entityIds[id];
       positionComponent   = this._entityManager.getComponentForEntity('PositionComponent', entityId);
       renderComponent     = this._entityManager.getComponentForEntity('RenderComponent', entityId);
-      controllerComponent = this._entityManager.getComponentForEntity('ControllerComponent', entityId);
-
-      color  = renderComponent.color;
       sprite = renderComponent.sprite;
 
-      if(color != null && renderComponent.layer != null)
+      if(this._camera.isWithinBounds(positionComponent, sprite))
       {
-        renderComponent.layer.context.fillStyle = color.rgb();
-      }
-      
-      if(positionComponent != null && sprite != null){
-        relativeX = positionComponent.x - this._camera.leftEdge();
-        relativeY = positionComponent.y - this._camera.topEdge();
-        if(sprite.image){
-          sprite.nextFrame(deltaTime);
-          renderComponent.layer.context.drawImage(
-            sprite.image, 
-            sprite.frameX, 
-            sprite.frameY, 
-            sprite.frameWidth, 
-            sprite.frameHeight, 
-            relativeX,
-            relativeY,
-            sprite.width, 
-            sprite.height
-            );
-        } else {
-          renderComponent.layer.context.fillRect(relativeX, relativeY, sprite.width, sprite.height);
+
+        controllerComponent = this._entityManager.getComponentForEntity('ControllerComponent', entityId);
+
+        color  = renderComponent.color;
+
+        if(color != null && renderComponent.layer != null)
+        {
+          renderComponent.layer.context.fillStyle = color.rgb();
+        }
+        
+        if(positionComponent != null && sprite != null){
+
+          relativeX = positionComponent.x - this._camera.leftEdge();
+          relativeY = positionComponent.y - this._camera.topEdge();
+
+          if(sprite.image){
+            sprite.nextFrame(deltaTime);
+            renderComponent.layer.context.drawImage(
+              sprite.image, 
+              sprite.frameX, 
+              sprite.frameY, 
+              sprite.frameWidth, 
+              sprite.frameHeight, 
+              relativeX,
+              relativeY,
+              sprite.width, 
+              sprite.height
+              );
+          } else {
+            renderComponent.layer.context.fillRect(relativeX, relativeY, sprite.width, sprite.height);
+          }
+          
         }
       }
       

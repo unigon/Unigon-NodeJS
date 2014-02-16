@@ -48,6 +48,18 @@ var Camera = Class.extend({
   height: function(){
     return this._height;
   },
+  isWithinBounds: function(position, sprite){
+    isWithinBounds = false;
+    spriteLeft = position.x >= this.leftEdge() - sprite.width;
+    spriteRight = position.x <= this.rightEdge() + sprite.width;
+    spriteTop = position.y >= this.topEdge() - sprite.width;
+    spriteBottom = position.y <= this.bottomEdge() + sprite.width;
+    if(spriteLeft && spriteRight && spriteTop && spriteBottom)
+    {
+      isWithinBounds = true;
+    }
+    return isWithinBounds;
+  },
   move: function(horizontal, vertical){
     this._bounds.upperLeft.x   += horizontal;
     this._bounds.upperLeft.y   += vertical;
