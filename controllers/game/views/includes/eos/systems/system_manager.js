@@ -9,6 +9,8 @@ var SystemManager = Class.extend({
     this._actionKey = null;
     this._messages  = new Messages();
     this._camera    = null;
+    this._frames    = 0;
+    this._lastFrameTime = startTime;
   },
   start: function(){
     this.update();
@@ -39,11 +41,22 @@ var SystemManager = Class.extend({
     currentTime    = this.currentTime();
     deltaTime      = currentTime - this._lastTime;
     deltaTime      = deltaTime / 1000;
+    this._frames++;
     this._lastTime = currentTime;
 
   	for(id in this._systems)
     {
       this._systems[id].system.update(deltaTime, this._actionKey, this._messages);
+      this._messages.update();
+    }
+
+    framesInLapsedTime = currentTime - this._lastFrameTime;
+    if(framesInLapsedTime >=1000)
+    {
+      framesPerSecond = 1000*this._frames / framesInLapsedTime;
+      this._lastFrameTime = currentTime;
+      this._frames = 0;
+      this._messages.add('console', Math.floor(framesPerSecond)+ ' FPS');
       this._messages.update();
     }
 

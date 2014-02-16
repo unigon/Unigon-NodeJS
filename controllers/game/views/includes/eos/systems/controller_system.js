@@ -25,7 +25,7 @@ var ControllerSystem = System.extend({
         movementComponent != null && 
         rendererComponent != null
       ){
-        movementDelta =  movementComponent.speed * deltaTime;
+        movementDelta =  Math.floor(movementComponent.speed * deltaTime);
         switch(action)
         {
           case controllerComponent.upKey():
