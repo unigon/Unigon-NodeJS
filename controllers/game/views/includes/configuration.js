@@ -96,8 +96,8 @@ var layersConfiguration = {
         keyCenter: 220,
       },
       position: {
-        x: 256,
-        y: 256
+        x: 32*10,
+        y: 32*22
       },
       movement:{
         speed: 500,

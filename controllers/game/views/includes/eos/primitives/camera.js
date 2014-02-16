@@ -70,9 +70,17 @@ var Camera = Class.extend({
   moveDown: function(){
     this._move(0,1);
   },
-  center: function(positionComponent){
-    this._x = Math.max(positionComponent.x - this._width / 2, 0);
-    this._y = Math.max(positionComponent.y - this._height / 2, 0);
+  center: function(position, map){
+    this._x = Math.max(position.x - this._width / 2, 0);
+    this._y = Math.max(position.y - this._height / 2, 0);
+    if(this._x + this._width > map.width())
+    {
+      this._x = map.width() - this._width;
+    }
+    if(this._y + this._height > map.height())
+    {
+      this._y = map.height() - this._height;
+    }
     this._setBounds();
   },
   copy: function(){

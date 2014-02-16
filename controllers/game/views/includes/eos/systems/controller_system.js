@@ -92,13 +92,13 @@ var ControllerSystem = System.extend({
             break;
           case controllerComponent.secondaryActionKey():
             positionComponent.reinit();
-            this._camera.center(positionComponent);
+            this._camera.center(positionComponent, this._map);
             messages.add('console', 
               'Activate Entity [' + entityId + '] secondary action');
             break;
           case controllerComponent.primaryActionKey():
             positionComponent.reinit();
-            this._camera.center(positionComponent);
+            this._camera.center(positionComponent, this._map);
             messages.add('console', 
               'Activate Entity [' + entityId + '] primary action');
             break;

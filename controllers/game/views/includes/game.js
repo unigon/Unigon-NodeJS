@@ -38,6 +38,14 @@ $(document).ready( function(){
     componentManager.createLayers(layersConfiguration);
   }
 
+  // center camera on the player
+  entitiesWithController = entityManager.getEntitiesForComponent('ControllerComponent');
+  for(entityId in entitiesWithController)
+  {
+    positionComponent   = entityManager.getComponentForEntity('PositionComponent', entityId);
+    camera.center(positionComponent, map);
+  }
+
   // add the various sub-systems 
   // used by the game
   healthSystem = new HealthSystem(entityManager, layers);
