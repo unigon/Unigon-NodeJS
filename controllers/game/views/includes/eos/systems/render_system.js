@@ -16,10 +16,11 @@ var RenderSystem = System.extend({
       this._layers[layer].clear();
     }
    
+    // only update what we are rendering if there is nothing visbile (cold-start)
+    // or else an action (e.g. player has moved)
     if(this._visibleEntityIds.length == 0 || action != null)
     {
       entitiesWithRenderComponent = this._entityManager.getEntitiesForComponent(this._componentName);
-      if (entitiesWithRenderComponent == 'undefined') return;
       entityIds = Object.keys(entitiesWithRenderComponent);
 
       this._visibleEntityIds.length = 0;

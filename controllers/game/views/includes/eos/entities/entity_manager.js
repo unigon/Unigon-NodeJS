@@ -54,7 +54,7 @@ var EntityManager = Class.extend({
   getEntitiesForComponent: function(aComponentName)
   {
   	entities = this._components[aComponentName];
-  	if(!entities)
+  	if(entities == null || entities == 'undefined')
   	{
   		entities = {};
   	}
