@@ -2,6 +2,7 @@ var RenderSystem = System.extend({
   init: function(aEntityManager, aLayers){
     this._super(aEntityManager, aLayers);
     this._componentName = 'RenderComponent';
+    this._visibleEntityIds = [];
   },
   addCamera: function(camera){
     this._camera = camera;
@@ -15,38 +16,42 @@ var RenderSystem = System.extend({
       this._layers[layer].clear();
     }
    
-    entitiesWithRenderComponent = this._entityManager.getEntitiesForComponent(this._componentName);
-    if (entitiesWithRenderComponent == 'undefined') return;
-    entityIds = Object.keys(entitiesWithRenderComponent);
-    visibilyEntityIds = [];
-
-    // determine what elements are visible and only render those
-    // we need to do this first before we sort
-    for(var id = 0; id < entityIds.length; id++)
+    if(this._visibleEntityIds.length == 0 || action != null)
     {
-      entityId            = entityIds[id];
-      positionComponent   = this._entityManager.getComponentForEntity('PositionComponent', entityId);
-      renderComponent     = this._entityManager.getComponentForEntity('RenderComponent', entityId);
-      sprite = renderComponent.sprite;
-      if(this._camera.isWithinBounds(positionComponent, sprite))
+      entitiesWithRenderComponent = this._entityManager.getEntitiesForComponent(this._componentName);
+      if (entitiesWithRenderComponent == 'undefined') return;
+      entityIds = Object.keys(entitiesWithRenderComponent);
+
+      this._visibleEntityIds.length = 0;
+
+      // determine what elements are visible and only render those
+      // we need to do this first before we sort
+      for(var id = 0; id < entityIds.length; id++)
       {
-        visibilyEntityIds.push(entityId);
+        entityId            = entityIds[id];
+        positionComponent   = this._entityManager.getComponentForEntity('PositionComponent', entityId);
+        renderComponent     = this._entityManager.getComponentForEntity('RenderComponent', entityId);
+        sprite = renderComponent.sprite;
+        if(this._camera.isWithinBounds(positionComponent, sprite))
+        {
+          this._visibleEntityIds.push(entityId);
+        }
       }
+
+      // painter's algorithm
+      // ensure we render in order of depth
+      // sprites higher on the screen (lower y) are deeper for 2D
+      __entityManager = this._entityManager;
+      this._visibleEntityIds.sort(function(firstId, secondId){
+        firstPositionComponent    = __entityManager.getComponentForEntity('PositionComponent', firstId);
+        secondPositionComponent   = __entityManager.getComponentForEntity('PositionComponent', secondId);
+        return firstPositionComponent.y - secondPositionComponent.y;
+      });
     }
 
-    // painter's algorithm
-    // ensure we render in order of depth
-    // sprites higher on the screen (lower y) are deeper for 2D
-    __entityManager = this._entityManager;
-    visibilyEntityIds.sort(function(firstId, secondId){
-      firstPositionComponent    = __entityManager.getComponentForEntity('PositionComponent', firstId);
-      secondPositionComponent   = __entityManager.getComponentForEntity('PositionComponent', secondId);
-      return firstPositionComponent.y - secondPositionComponent.y;
-    });
-
-    for(var index = 0; index < visibilyEntityIds.length; index++)
+    for(var index = 0; index < this._visibleEntityIds.length; index++)
     {
-      entityId            = visibilyEntityIds[index];
+      entityId            = this._visibleEntityIds[index];
       positionComponent   = this._entityManager.getComponentForEntity('PositionComponent', entityId);
       renderComponent     = this._entityManager.getComponentForEntity('RenderComponent', entityId);
       sprite = renderComponent.sprite;
